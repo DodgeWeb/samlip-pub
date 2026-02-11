@@ -1,0 +1,373 @@
+@use '@/assets/style/mixins.scss' as *;
+
+#pub-root {
+    // 개인정보처리방침 컨테이너
+    .privacy-container {
+        max-width: 875px;
+    }
+
+    // 개인정보처리방침 안내 섹션
+    .privacy-intro {
+        margin-bottom: 24px;
+        max-width: 800px;
+
+        @include desktop {
+            margin-bottom: 48px;
+        }
+    }
+
+    .privacy-date {
+        font-size: 12px;
+        margin-bottom: 4px;
+        line-height: 1.6;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .privacy-title {
+        font-size: 16px;
+        line-height: 1.4;
+        font-weight: bold;
+        margin-bottom: 10px;
+
+        @include desktop {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .privacy-description {
+        font-size: 12px;
+        line-height: 1.6;
+
+        @include desktop {
+            font-size: 18px;
+        }
+    }
+
+    // 주요 개인정보 처리표시
+    .privacy-labeling {
+        margin-bottom: 24px;
+
+        @include desktop {
+            margin-bottom: 48px;
+        }
+    }
+
+    .privacy-labeling-title {
+        font-size: 14px;
+        line-height: 1.7;
+        font-weight: bold;
+        margin-bottom: 8px;
+
+        @include desktop {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .privacy-labeling-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid #d9d9d9;
+        max-width: 100%;
+
+        @include desktop {
+            max-width: 720px;
+        }
+
+        > * {
+            text-align: center;
+            padding: 14px 0;
+
+            @include desktop {
+                padding: 30px 0;
+            }
+        }
+
+        > li {
+            border-right: 1px solid #d9d9d9;
+            border-bottom: 1px solid #d9d9d9;
+
+            &:nth-child(4n) {
+                border-right: 0;
+            }
+
+            &:nth-last-child(-n+4) {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    .privacy-labeling-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        @include desktop {
+            gap: 8px;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+
+            @include desktop {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        span {
+            font-size: 12px;
+            margin-top: 4px;
+            line-height: 1.6;
+            display: block;
+
+            @include desktop {
+                font-size: 18px;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    // 조항 섹션
+    .privacy-section {
+        margin-bottom: 24px;
+
+        @include desktop {
+            margin-bottom: 48px;
+        }
+    }
+
+    .privacy-section-title {
+        font-size: 14px;
+        line-height: 1.7;
+        font-weight: bold;
+        margin-bottom: 8px;
+
+        @include desktop {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .privacy-text {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 4px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .privacy-text-large {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: 4px;
+        margin-bottom: 10px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-top: 16px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .privacy-text-with-spacing {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: 4px;
+        margin-bottom: 10px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+    }
+
+    .privacy-text-inline-block {
+        display: inline;
+
+        @include desktop {
+            display: block;
+        }
+    }
+
+    // 테이블 스타일
+    .privacy-table-wrapper {
+        overflow-x: auto;
+        margin: 8px 0;
+        max-width: 100%;
+
+        @include desktop {
+            margin: 12px 0;
+            max-width: 780px;
+        }
+    }
+
+    .privacy-table {
+        min-width: 100%;
+        border: 1px solid #d9d9d9;
+        font-size: 12px;
+        line-height: 1.6;
+
+        @include desktop {
+            font-size: 15px;
+        }
+
+        * {
+            white-space: nowrap;
+        }
+
+        * * {
+            vertical-align: middle;
+        }
+
+        thead {
+            tr {
+                * {
+                    border-bottom: 1px solid #d9d9d9;
+                    padding: 4px 8px;
+                    text-align: center;
+                    font-weight: 600;
+
+                    @include desktop {
+                        padding: 8px;
+                    }
+                }
+            }
+        }
+
+        th {
+            border-right: 1px solid #d9d9d9;
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        tbody {
+            * {
+                text-align: center;
+            }
+        }
+
+        td {
+            border-bottom: 1px solid #d9d9d9;
+            border-right: 1px solid #d9d9d9;
+            padding: 10px;
+            vertical-align: middle;
+
+            @include desktop {
+                padding: 20px 24px;
+            }
+
+            &:last-child {
+                border-right: 0;
+            }
+
+            &:last-of-type {
+                border-right: 0;
+            }
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+    }
+
+    .privacy-table-large {
+        @extend .privacy-table-wrapper;
+
+        @include desktop {
+            max-width: 850px;
+        }
+    }
+
+    .privacy-table-medium {
+        @extend .privacy-table-wrapper;
+
+        @include desktop {
+            max-width: 640px;
+        }
+    }
+
+    // 리스트 스타일
+    .privacy-list {
+        padding-left: 16px;
+        list-style-type: disc;
+
+        @include desktop {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 4px;
+
+            @include desktop {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    // 특수 스타일
+    .privacy-flex-start {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: 10px;
+
+        @include desktop {
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .privacy-text-nowrap {
+            white-space: nowrap;
+        }
+    }
+
+    .privacy-text-center {
+        text-align: center;
+    }
+
+    .privacy-block {
+        display: block;
+    }
+
+    .privacy-text-last {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: 4px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-top: 16px;
+        }
+    }
+
+    .privacy-table-header-cell {
+        background-color: #ddd;
+        font-weight: bold;
+    }
+
+    .bottom-border {
+        border-bottom: 1px solid #d9d9d9 !important;
+    }
+}

@@ -1,0 +1,303 @@
+@use '@/assets/style/mixins.scss' as *;
+
+#pub-root {
+    // 영상정보처리기기 운영방침 (2025.07) 컨테이너
+    .video-202507-container {
+        max-width: 875px;
+    }
+
+    // 영상정보처리기기 운영방침 안내 섹션
+    .video-202507-intro {
+        margin-bottom: 24px;
+        max-width: 800px;
+
+        @include desktop {
+            margin-bottom: 48px;
+        }
+    }
+
+    .video-202507-date {
+        font-size: 12px;
+        margin-bottom: 4px;
+        line-height: 1.6;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .video-202507-title {
+        font-size: 16px;
+        line-height: 1.4;
+        font-weight: bold;
+        margin-bottom: 10px;
+
+        @include desktop {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .video-202507-description {
+        font-size: 12px;
+        line-height: 1.6;
+
+        @include desktop {
+            font-size: 18px;
+        }
+    }
+
+    // 주요 영상정보 처리표시(라벨링)
+    .video-202507-labeling {
+        margin-bottom: 24px;
+
+        @include desktop {
+            margin-bottom: 48px;
+        }
+    }
+
+    .video-202507-labeling-title {
+        font-size: 14px;
+        line-height: 1.7;
+        font-weight: bold;
+        margin-bottom: 8px;
+
+        @include desktop {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .video-202507-labeling-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid #d9d9d9;
+        max-width: 100%;
+
+        @include desktop {
+            max-width: 848px;
+        }
+
+        > * {
+            text-align: center;
+            padding: 14px 0;
+
+            @include desktop {
+                padding: 30px 0;
+            }
+        }
+
+        > li {
+            border-right: 1px solid #d9d9d9;
+            border-bottom: 1px solid #d9d9d9;
+
+            &:nth-child(4n) {
+                border-right: 0;
+            }
+
+            &:nth-last-child(-n+4) {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    .video-202507-labeling-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        @include desktop {
+            gap: 8px;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+
+            @include desktop {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        span {
+            font-size: 12px;
+            margin-top: 4px;
+            line-height: 1.6;
+            display: block;
+
+            @include desktop {
+                font-size: 18px;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    // 조항 섹션
+    .video-202507-section {
+        margin-bottom: 24px;
+
+        @include desktop {
+            margin-bottom: 48px;
+        }
+    }
+
+    .video-202507-section-title {
+        font-size: 14px;
+        line-height: 1.7;
+        font-weight: bold;
+        margin-bottom: 8px;
+
+        @include desktop {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .video-202507-text {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 4px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .video-202507-text-large {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: 4px;
+        margin-bottom: 10px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-top: 16px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .video-202507-text-with-spacing {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: 16px;
+        display: block;
+
+        @include desktop {
+            font-size: 18px;
+            margin-top: 24px;
+        }
+    }
+
+    // 번호 목록(ol)
+    .video-202507-list-ordered {
+        padding-left: 20px;
+        list-style-type: decimal;
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+
+        @include desktop {
+            font-size: 18px;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin-bottom: 4px;
+
+            @include desktop {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    // 테이블
+    .video-202507-table-wrapper {
+        overflow-x: auto;
+        margin: 8px 0;
+        max-width: 100%;
+
+        @include desktop {
+            margin: 12px 0;
+            max-width: 848px;
+        }
+    }
+
+    .video-202507-table {
+        min-width: 100%;
+        border: 1px solid #d9d9d9;
+        font-size: 12px;
+        line-height: 1.6;
+
+        @include desktop {
+            font-size: 15px;
+        }
+
+        * {
+            white-space: nowrap;
+        }
+
+        * * {
+            vertical-align: middle;
+        }
+
+        thead tr {
+            * {
+                border-bottom: 1px solid #d9d9d9;
+                padding: 4px 8px;
+                text-align: center;
+                font-weight: 600;
+
+                @include desktop {
+                    padding: 8px;
+                }
+            }
+        }
+
+        th {
+            border-right: 1px solid #d9d9d9;
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        tbody {
+            * {
+                text-align: center;
+            }
+        }
+
+        td {
+            border-bottom: 1px solid #d9d9d9;
+            border-right: 1px solid #d9d9d9;
+            padding: 16px 10px;
+
+            @include desktop {
+                padding: 24px 20px;
+            }
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+    }
+
+    // rowSpan 셀 상단 정렬
+    .video-202507-table-cell-top {
+        vertical-align: top;
+    }
+}

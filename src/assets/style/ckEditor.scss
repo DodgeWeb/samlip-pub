@@ -1,0 +1,526 @@
+@use '@/assets/style/mixins.scss' as *;
+
+// body2 스타일 믹스인 p 태그
+@mixin body2-style {
+    font-size: 12px;
+  line-height: 160%;
+  // Tablet
+  @include tablet {
+    font-size: 14px;
+    line-height: 160%;
+  }
+  
+  // Desktop
+  @include desktop {
+    font-size: 20px;
+    line-height: 180%;
+  }
+}
+@mixin body1-style {
+    font-size: 14px;
+    line-height: 160%;
+    @include tablet {
+        font-size: 16px;
+        line-height: 160%;
+    }
+    @include desktop {
+        font-size: 24px;
+        line-height: 180%;
+    }
+}
+
+#pub-root {
+  .migration {
+    &.notice {
+      .table-area {
+        width: calc(100% + 20px);
+        margin-right: -20px !important;
+        overflow-x: auto;
+        margin-bottom: 50px;
+        padding-right: 20px;
+
+        .table-fs-new-header {
+          margin-bottom: 0px !important;
+        }
+
+        table {
+          width: 100%;
+          table-layout: auto;
+          overflow-x: auto;
+          white-space: nowrap;
+
+          th, td {
+
+
+          }
+
+          thead th {
+            // background-color: #f7f7f7;
+          }
+        }
+      }
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      list-style-position: outside;
+      @include body2-style;
+    }
+
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      margin-block: 26px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    img {
+      width: 100%;
+      margin-block: 26px;
+    }
+
+    .wp-block-image {
+
+    }
+
+    ul {
+      list-style: disc;
+      margin-bottom: 26px;
+
+      margin-bottom: 26px;
+      padding-left: 20px;
+
+      &::marker {
+        display: block;
+      }
+    }
+
+    ol {
+      list-style: decimal;
+      margin-bottom: 26px;
+      break-inside: auto;
+      word-break: keep-all;
+
+      &::marker {
+        display: block;
+      }
+
+      li {
+        display: list-item;
+      }
+    }
+
+    /* 테이블 기본 스타일 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    th, td {
+      border: 1px solid #d9d9d9;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      background-color: #f7f7f7;
+      font-weight: 600;
+    }
+
+    caption {
+      caption-side: top;
+      padding: 8px 0;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    /* Mobile (기본값) */
+    .h2, h2 {
+      font-size: 22px;
+      line-height: 150%;
+      margin-bottom: 26px !important;
+    }
+
+    //   .h2-highlight {
+    //     font-size: 18px;
+    //     line-height: 150%;
+    //     font-weight: 700;
+    //   }
+    .h3 {
+      font-size: 18px;
+      line-height: 130%;
+    }
+
+    h4 {
+      @include body1-style;
+      font-weight: 700;
+      margin-bottom: 26px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      line-height: 130%;
+    }
+
+    .body1 {
+      font-size: 14px;
+      line-height: 170%;
+    }
+
+    //   .body1-highlight {
+    //     font-size: 14px;
+    //     line-height: 170%;
+    //     font-weight: 700;
+    //   }
+    p {
+      @include body2-style;
+      margin-bottom: 26px;
+    }
+
+    .caption {
+      font-size: 10px;
+      line-height: 170%;
+    }
+
+    /* Tablet */
+    @include tablet {
+      .h2, h2 {
+        font-size: 28px;
+        line-height: 130%;
+      }
+      .h1-highlight {
+        font-size: 28px;
+        line-height: 130%;
+        font-weight: 700;
+      }
+      .h2 {
+        font-size: 25px;
+        line-height: 130%;
+      }
+      .subtitle {
+        font-size: 20px;
+        line-height: 130%;
+      }
+      .body1 {
+        font-size: 16px;
+        line-height: 160%;
+      }
+      .body1-highlight {
+        font-size: 16px;
+        line-height: 160%;
+        font-weight: 700;
+      }
+      .body2 {
+        @include body2-style;
+      }
+      .caption {
+        font-size: 12px;
+        line-height: 140%;
+        text-align: left;
+      }
+    }
+
+    /* PC */
+    @include desktop {
+      .h1 {
+        font-size: 42px;
+        line-height: 130%;
+      }
+      .h1-highlight {
+        font-size: 42px;
+        line-height: 130%;
+        font-weight: 700;
+      }
+      .h2, h2 {
+        font-size: 36px;
+        line-height: 130%;
+      }
+      .subtitle {
+        font-size: 30px;
+        line-height: 130%;
+      }
+      .body1 {
+        font-size: 24px;
+        line-height: 180%;
+      }
+      .body1-highlight {
+        font-size: 24px;
+        line-height: 180%;
+        font-weight: 700;
+      }
+      .body2 {
+        @include body2-style;
+      }
+      .caption {
+        font-size: 14px;
+        line-height: 150%;
+      }
+    }
+
+  }
+
+  .prose, .ck-content {
+    /* Tailwind prose max-w-none prose-lg 대응 */
+    max-width: none;
+    width: 100%;
+    font-size: inherit;
+    line-height: inherit;
+
+    ul, ol {
+      padding-left: 20px;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    /* 테이블 기본 스타일 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    th, td {
+      border: 1px solid #d9d9d9;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      background-color: #f7f7f7;
+      font-weight: 600;
+    }
+
+    caption {
+      caption-side: top;
+      padding: 8px 0;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    /* Mobile (기본값) */
+    .h2 {
+      font-size: 22px;
+      line-height: 150%;
+    }
+
+    //   .h2-highlight {
+    //     font-size: 18px;
+    //     line-height: 150%;
+    //     font-weight: 700;
+    //   }
+    .h3 {
+      font-size: 18px;
+      line-height: 130%;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      line-height: 130%;
+    }
+
+    .body1 {
+      font-size: 14px;
+      line-height: 170%;
+    }
+
+    //   .body1-highlight {
+    //     font-size: 14px;
+    //     line-height: 170%;
+    //     font-weight: 700;
+    //   }
+    p {
+      @include body2-style;
+    }
+
+    .caption {
+      font-size: 10px;
+      line-height: 170%;
+    }
+
+    /* Tablet */
+    @include tablet {
+      .h2 {
+        font-size: 28px;
+        line-height: 130%;
+      }
+      .h1-highlight {
+        font-size: 28px;
+        line-height: 130%;
+        font-weight: 700;
+      }
+      .h2 {
+        font-size: 25px;
+        line-height: 130%;
+      }
+      .subtitle {
+        font-size: 20px;
+        line-height: 130%;
+      }
+      .body1 {
+        font-size: 16px;
+        line-height: 160%;
+      }
+      .body1-highlight {
+        font-size: 16px;
+        line-height: 160%;
+        font-weight: 700;
+      }
+      .body2 {
+        @include body2-style;
+      }
+      .caption {
+        font-size: 12px;
+        line-height: 140%;
+        text-align: left;
+      }
+    }
+
+    /* PC */
+    @include desktop {
+      .h1 {
+        font-size: 42px;
+        line-height: 130%;
+      }
+      .h1-highlight {
+        font-size: 42px;
+        line-height: 130%;
+        font-weight: 700;
+      }
+      .h2 {
+        font-size: 36px;
+        line-height: 130%;
+      }
+      .subtitle {
+        font-size: 30px;
+        line-height: 130%;
+      }
+      .body1 {
+        font-size: 24px;
+        line-height: 180%;
+      }
+      .body1-highlight {
+        font-size: 24px;
+        line-height: 180%;
+        font-weight: 700;
+      }
+      .body2 {
+        @include body2-style;
+      }
+      .caption {
+        font-size: 14px;
+        line-height: 150%;
+      }
+    }
+  }
+
+
+  .hard_coding_edit {
+    p {
+      font-size: 14px;
+      line-height: 170%;
+      letter-spacing: -0.42px;
+      @include desktop {
+        font-size: 24px;
+        line-height: 160%;
+        letter-spacing: -0.66px;
+      }
+    }
+
+    p.label {
+      &.red {
+        color: var(--samlip-red);
+
+        &::before {
+          content: "";
+          width: 2px;
+          @include desktop {
+            width: 3px;
+          }
+          height: auto;
+          background-color: var(--samlip-red);
+          margin-right: 12px;
+          display: block;
+        }
+      }
+
+      font-weight: 800; // extra bold
+
+      font-size: 16px;
+      @include desktop {
+        font-size: 36px;
+      }
+      display: flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      margin-bottom: 12px;
+      @include desktop {
+        margin-bottom: 20px;
+      }
+      line-height: 1.3;
+      letter-spacing: -0.42px;
+      position: relative;
+
+    }
+
+    p.cation {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 150%;
+      letter-spacing: -3%;
+
+      @include desktop {
+        font-size: 15px;
+      }
+    }
+
+    .contents {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+
+      &.contents_20px {
+        gap: 20px;
+      }
+
+      &.contents_36px {
+        gap: 36px;
+      }
+
+      &.contents_12px {
+        gap: 12px;
+      }
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #000;
+        padding: 20px 24px;
+        gap: 10px;
+      }
+    }
+
+    h2.subtitle {
+      font-size: 16px;
+      line-height: 130%;
+      @include desktop {
+        font-size: 30px;
+        line-height: 130%;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,2042 @@
+@use '@/assets/style/mixins.scss' as *;
+
+// .sub2 스타일을 믹스인으로 정의 (재사용 가능)
+@mixin sub2-style {
+  font-family: 'Sandoll GothicNeo1 TTF', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 140%;
+  letter-spacing: -0.5%;
+}
+
+@mixin body1-style {
+  font-family: 'Sandoll GothicNeo1 TTF', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  letter-spacing: -1%;
+}
+
+@mixin body2-style {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 160%;
+  letter-spacing: -1%;
+}
+
+@mixin body2-mobile-style {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 170%;
+  letter-spacing: -3%;
+}
+
+#pub-root {
+  // 기본은 TTF 폰트 사용, 특수 글자(릳 등)는 .unicode 클래스로 개별 적용 필요
+  /* 산돌 폰트가 우선 적용되도록 첫 번째로 배치 */
+  font-family: 'Sandoll GothicNeo1 TTF',
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Noto Color Emoji",
+  sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-break: keep-all;
+  background-color: var(--white);
+  color: #1a202c;
+
+  .sub2 {
+    @include sub2-style;
+  }
+
+  // 특수한 상황: h2에 .sub2-desktop 클래스를 추가하면 데스크탑에서 sub2 스타일 적용
+  h2.sub2-desktop {
+    @include desktop {
+      @include sub2-style;
+    }
+  }
+
+  input, textarea {
+    outline: none;
+  }
+
+  .mo_display {
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 130%;
+    letter-spacing: -0.84px;
+  }
+
+  .mo_h2 {
+    font-size: 18px;
+    line-height: 130%;
+    letter-spacing: -0.54px;
+  }
+
+  .mo_caption {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 160%;
+    letter-spacing: -0.3px;
+  }
+
+  .mo_body1 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 170%;
+    letter-spacing: -0.42px;
+  }
+
+  .mo_body2 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 160%;
+    letter-spacing: -0.36px !important;
+  }
+
+  .mo_subtitle {
+    // font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.48px;
+  }
+
+  @include tablet {
+    .tl_sub1 {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 130%;
+      letter-spacing: -4%;
+    }
+    .tl_sub2 {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 130%;
+      letter-spacing: -4%;
+    }
+    .tl_body1 {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 160%;
+      letter-spacing: -4%;
+    }
+    .tl_body2 {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 160%;
+      letter-spacing: -0.36px;
+    }
+    .tl_caption {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 160%;
+      letter-spacing: -0.36px;
+    }
+
+  }
+
+  @include desktop {
+    .pc_body1 {
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 160%;
+      letter-spacing: -1%;
+    }
+
+    .pc_body2 {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 160%;
+      letter-spacing: -0.54px;
+    }
+
+
+    .pc_h2 {
+      font-weight: 800;
+      font-size: 42px;
+      line-height: 130%;
+      letter-spacing: -3%;
+    }
+    .pc_cation {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 160%;
+      letter-spacing: -1%;
+    }
+    .pc_sub1 {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 140%;
+      letter-spacing: -0.5%;
+    }
+    .pc_sub2 {
+      font-size: 26px;
+      line-height: 140%;
+      letter-spacing: -0.5%;
+    }
+  }
+
+  .unicode {
+    font-family: 'Sandoll GothicNeo1Uni TTF', sans-serif;
+  }
+
+  @layer base {
+    h2 {
+      font-family: 'Sandoll GothicNeo1 TTF', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 150%;
+      letter-spacing: -3%;
+
+      @include desktop {
+        font-size: 42px;
+        line-height: 130%;
+        letter-spacing: -3%;
+      }
+    }
+  }
+
+  .body1 {
+    @include body1-style;
+    @include desktop {
+      font-size: 22px;
+      line-height: 160%;
+      letter-spacing: -1%;
+    }
+  }
+
+  .desktop-body1 {
+    @include desktop {
+      @include body1-style;
+    }
+  }
+
+  // mobile-body2와 함께 사용할 때 데스크탑 우선순위 보장
+  .mobile-body2.desktop-body1 {
+    @include desktop {
+      @include body1-style;
+    }
+  }
+
+  .body2 {
+    @include body2-style;
+  }
+
+  .mobile-body2 {
+    @include body2-mobile-style;
+    @include desktop {
+      // 데스크탑에서는 스타일 제거 (desktop-body1이 우선)
+      font-weight: unset;
+      font-size: unset;
+      line-height: unset;
+      letter-spacing: unset;
+    }
+  }
+
+  .desktop-body2 {
+    @include desktop {
+      @include body2-style;
+    }
+  }
+
+
+  .caption {
+    font-family: 'Sandoll GothicNeo1 TTF', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+    letter-spacing: -1%;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .table-container {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    min-width: max-content;
+    border-collapse: collapse;
+    border: 1px solid #D9D9D9;
+    @include tablet {
+      min-width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+    }
+
+    &.council {
+      td {
+        font-size: 10px;
+        padding-inline: 20px;
+        word-break: break-word;
+        white-space: break-spaces;
+        @include desktop {
+          font-size: 22px;
+          padding-block: 32px;
+
+        }
+      }
+
+      // 이사회 구성(피그마 5100:7395 기준) - 5컬럼
+      // 모바일: 80px, 90px, 140px, 180px, 220px
+      th:first-child, td:first-child {
+        width: 80px;
+        padding-inline: 10px;
+      }
+
+      th:nth-child(2), td:nth-child(2) {
+        width: 90px;
+      }
+
+      th:nth-child(3), td:nth-child(3) {
+        width: 140px;
+      }
+
+      th:nth-child(4), td:nth-child(4) {
+        width: 180px;
+      }
+
+      th:nth-child(5), td:nth-child(5) {
+        width: 220px;
+      }
+
+      @include desktop {
+        // 데스크탑(피그마): 120px, 147px, 261px, auto, auto
+        th:first-child, td:first-child {
+          width: 120px;
+        }
+        th:nth-child(2), td:nth-child(2) {
+          width: 147px;
+        }
+        th:nth-child(3), td:nth-child(3) {
+          width: 261px;
+          white-space: nowrap;
+        }
+        th:nth-child(4), td:nth-child(4) {
+          width: auto;
+        }
+        th:nth-child(5), td:nth-child(5) {
+          width: auto;
+        }
+      }
+    }
+
+    &.env {
+      font-size: 12px !important;
+
+      th:first-child, td:first-child {
+        width: 100px;
+        @include desktop {
+          width: 200px;
+        }
+      }
+
+      th:nth-child(2), td:nth-child(2) {
+        width: 130px;
+      }
+
+      th:nth-child(n+3), td:nth-child(n+3) {
+        width: 90px;
+      }
+    }
+
+    &.result-table {
+      // max-width: 1180px;
+      width: 100%;
+      min-width: 100% !important;
+      // table-layout: fixed;
+      min-width: 100% !important;
+      border: 1px solid #D9D9D9;
+
+      th {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 160%;
+        letter-spacing: -1%;
+        text-align: center;
+        padding-block: 7.25px;
+        padding-inline: 5px;
+        white-space: nowrap;
+
+        @include desktop {
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 160%;
+          padding-block: 14.5px;
+          letter-spacing: -1%;
+        }
+      }
+
+      td {
+        white-space: wrap;
+        padding-inline: 12px;
+      }
+
+      colgroup {
+        width: 100%;
+      }
+
+      // 모바일: 85px, 70px, 90px, 76px, 합쳐진 열 270px
+      // Safari는 col의 min-width를 무시하는 경우가 있어 width + 첫 셀 min-width로 보강
+      col.col-1 {
+        min-width: 85px;
+        width: 85px;
+      }
+
+      th:first-child,
+      td:first-child {
+        min-width: 85px;
+      }
+
+      col.col-2 {
+        width: 70px;
+      }
+
+      col.col-3 {
+        width: 90px;
+      }
+
+      col.col-4 {
+        width: 76px;
+      }
+
+      col.col-5 {
+        // width: 135px;
+        min-width: 150px;
+      }
+
+      col.col-6 {
+        width: 135px;
+        //   min-width: 170px;
+        // min-width: 135px;
+        //   width: 100%;
+      }
+
+      @include desktop {
+        // PC: 2배씩 (169px, 139px, 180px, 152px, 합쳐진 열 540px)
+        col.col-1 {
+          width: 169px;
+        }
+        col.col-2 {
+          width: 139px;
+        }
+        col.col-3 {
+          width: 180px;
+        }
+        col.col-4 {
+          width: 152px;
+        }
+        col.col-5 {
+          width: 270px;
+        }
+        col.col-6 {
+          width: 270px;
+        }
+      }
+    }
+
+    &.result-table-2 {
+      max-width: 1220px;
+      width: 100%;
+      table-layout: auto;
+
+      th {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 160%;
+        letter-spacing: -1%;
+        text-align: center;
+        padding-block: 7.25px;
+        white-space: nowrap;
+
+        @include desktop {
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 160%;
+          padding-block: 14.5px;
+          letter-spacing: -1%;
+        }
+      }
+
+      td {
+        white-space: wrap;
+      }
+
+      // 모바일: 의안, 찬성, 반대, 기권, 비고
+      col.col-agenda {
+        width: 210px;
+      }
+
+      col.col-for {
+        width: 80px;
+      }
+
+      col.col-against {
+        width: 80px;
+      }
+
+      col.col-abstain {
+        width: 80px;
+      }
+
+      col.col-remark {
+        width: 100px;
+      }
+
+      @include desktop {
+        col.col-agenda {
+          min-width: 400px;
+        }
+        col.col-for {
+          width: 150px;
+        }
+        col.col-against {
+          width: 150px;
+        }
+        col.col-abstain {
+          width: 150px;
+        }
+        col.col-remark {
+          width: 200px;
+        }
+      }
+    }
+
+    th {
+      background-color: var(--samplip-deil-cut);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 11px;
+      line-height: 160%;
+      letter-spacing: -1%;
+      text-align: center;
+      padding-block: 19.5px;
+      white-space: nowrap;
+
+      @include desktop {
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 160%;
+        padding-block: 14.5px;
+        letter-spacing: -1%;
+      }
+
+    }
+
+    td {
+      border: 1px solid #D9D9D9;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 160%;
+      letter-spacing: -1%;
+      text-align: center;
+      white-space: nowrap;
+      padding-block: 19.5px;
+
+
+      @include desktop {
+        font-size: 22px;
+        padding-block: 20px;
+      }
+    }
+  }
+
+
+  // 안전보건 경영목표 카드 스타일
+  .goal-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #D9D9D9;
+
+    @include desktop {
+      border: none;
+      gap: 20px;
+    }
+  }
+
+  .goal-card-item {
+    border-bottom: 1px solid #D9D9D9;
+    display: flex;
+    flex-direction: column;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    @include desktop {
+      flex-direction: row;
+      border-bottom: none;
+    }
+  }
+
+  .goal-card-header {
+    background-color: #F7F7F7;
+    padding: 6.5px 12px;
+    border-bottom: 1px solid #D9D9D9;
+    flex: none;
+
+    @include desktop {
+      padding: 12px 72px;
+      border-bottom: none;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      color: #000000;
+
+      @include desktop {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .goal-card-content {
+    padding: 12px;
+    background-color: #ffffff;
+
+    @include desktop {
+      padding: 12px;
+      border: 1px solid #D9D9D9;
+      border-left: 0px;
+      width: 100%;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      color: #000000;
+      list-style: decimal;
+      list-style-position: inside;
+
+      @include desktop {
+        font-size: 12px;
+      }
+    }
+  }
+
+  // 신고 섹션 input 스타일
+  .report-input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    color: #000000;
+    background-color: var(--gray_back);
+    border: 1px solid transparent;
+
+    &::placeholder {
+      color: var(--gray_txt);
+    }
+
+    @include desktop {
+      font-size: 22px;
+      padding: 16px 18px;
+    }
+
+    &.filled {
+      background-color: #ffffff;
+      border: 1px solid var(--line2);
+    }
+  }
+
+  // 신고 섹션 textarea 스타일
+  .report-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    color: #000000;
+    background-color: var(--gray_back);
+    resize: none;
+
+    &::placeholder {
+      color: var(--gray_txt);
+    }
+
+    &.filled {
+      background-color: #ffffff;
+      border: 1px solid var(--line2);
+    }
+
+    @include desktop {
+      font-size: 22px;
+      padding: 16px 18px;
+    }
+  }
+
+  // 신고 섹션 label 스타일
+  .report-label {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: #000000;
+
+    @include desktop {
+      font-size: 26px;
+    }
+  }
+
+  // 신고 섹션 버튼 스타일
+  .report-button {
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray_back);
+    color: var(--gray_txt);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+
+    @include desktop {
+      font-size: 22px;
+      width: 230px;
+      height: 67px;
+
+    }
+
+    &.active,
+    &.selected {
+      background-color: var(--grilled-meats);
+      color: #ffffff;
+    }
+  }
+
+  // 주주총회 결과 기수 선택 버튼 스타일
+  .result-period-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 20px;
+    border-radius: 99px;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: -0.14px;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    @include desktop {
+      gap: 16px;
+      padding: 8px 32px;
+      font-size: 18px;
+    }
+
+    &.active {
+      background-color: #f40202;
+      color: #ffffff;
+      border-color: #f40202;
+      font-weight: 700;
+      letter-spacing: -0.14px;
+    }
+  }
+
+  .result-period-list {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+
+    @include desktop {
+      gap: 16px;
+    }
+  }
+
+
+  .technology-index-card10 {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 68px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    @include desktop {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-bottom: 160px;
+      gap: 4px;
+    }
+
+    li {
+      grid-column: span 2;
+      @include desktop {
+        grid-column: span 1;
+      }
+
+      &:nth-child(4),
+      &:nth-child(5),
+      &:nth-child(9),
+      &:nth-child(10) {
+        grid-column: span 3;
+        max-width: 60%;
+        @include desktop {
+          grid-column: span 1;
+          max-width: 100%;
+        }
+      }
+
+      &:nth-child(4),
+      &:nth-child(9) {
+        margin: 0 0 0 auto;
+        min-width: 60%;
+        @include desktop {
+          margin: 0;
+          min-width: auto;
+        }
+      }
+    }
+
+
+    .num {
+      width: 100%;
+      font-weight: 900;
+      text-align: center;
+      font-family: GT-Ultra-Standard-Ultra;
+      font-size: 14px;
+      padding: 8px;
+      @include desktop {
+        font-size: 26px;
+        padding: 12px;
+      }
+    }
+
+    .info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      gap: 8px;
+      font-size: 14px;
+      padding: 12px 0 12px;
+      font-weight: 800;
+      line-height: 140%;
+      @include desktop {
+        font-size: 30px;
+        gap: 16px;
+        padding: 60px 0 80px;
+      }
+
+      img {
+        width: 22px;
+        height: 22px;
+        @include desktop {
+          width: 48px;
+          height: 48px;
+        }
+      }
+    }
+
+    .num1 {
+      background-color: #612E10;
+      color: #FBC68C;
+
+      .num {
+        background-color: rgba(#FBC68C, 0.3);
+        color: #FBC68C;
+      }
+    }
+
+    .num2 {
+      background-color: #634200;
+      color: #FFF2AD;
+
+      .num {
+        background-color: rgba(#FFE14A, 0.3);
+        color: #FFE14A;
+      }
+    }
+
+    .num3 {
+      background-color: #6E0538;
+      color: #FFB5E9;
+
+      .num {
+        background-color: rgba(#FFB5E9, 0.3);
+        color: #FFB5E9;
+      }
+    }
+
+    .num4 {
+      background-color: #0B391B;
+      color: #DAF886;
+
+      .num {
+        background-color: rgba(#DAF886, 0.3);
+        color: #DAF886;
+      }
+    }
+
+    .num5 {
+      background-color: #4B0476;
+      color: #E2C9F7;
+
+      .num {
+        background-color: rgba(#D7A6FF, 0.3);
+        color: #D7A6FF;
+      }
+    }
+
+    .num6 {
+      background-color: #54C7DE;
+      color: #0D2742;
+
+      .num {
+        background-color: rgba(#006DA8, 0.3);
+        color: #0D2742;
+      }
+    }
+
+    .num7 {
+      background-color: #FF7ABA;
+      color: #6E0538;
+
+      .num {
+        background-color: rgba(#D00667, 0.3);
+        color: #6E0538;
+      }
+    }
+
+    .num8 {
+      background-color: #FF8A1D;
+      color: #612E10;
+
+      .num {
+        background-color: rgba(#B94300, 0.3);
+        color: #612E10;
+      }
+    }
+
+    .num9 {
+      background-color: #D7A6FF;
+      color: #4B0476;
+
+      .num {
+        background-color: rgba(#9406B7, 0.3);
+        color: #4B0476;
+      }
+    }
+
+    .num10 {
+      background-color: #76CA22;
+      color: #0B391B;
+
+      .num {
+        background-color: rgba(#238600, 0.3);
+        color: #0B391B;
+      }
+    }
+
+    .detail {
+      padding: 4px 12px;
+      font-size: 12px;
+      text-align: center;
+      font-weight: 800;
+      margin-top: 2px;
+      @include tablet {
+        padding-inline: 40px;
+      }
+
+      &.num2, &.num7 {
+        margin-left: -2px;
+      }
+
+      &.num3, &.num8 {
+        margin-left: -4px;
+      }
+
+      &.num4, &.num9 {
+        margin-left: calc(235% - 2px);
+      }
+
+      &.num5, &.num10 {
+        margin-left: calc(235% - 4px);
+      }
+
+      @include desktop {
+        padding: 50px 100px;
+        font-size: 22px;
+        margin-top: 4px;
+        &.num2, &.num7 {
+          margin-left: -4px;
+        }
+        &.num3, &.num8 {
+          margin-left: -8px;
+        }
+        &.num4, &.num9 {
+          margin-left: -12px;
+        }
+        &.num5, &.num10 {
+          margin-left: -16px;
+        }
+      }
+    }
+  }
+
+  .technology-index-card5 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+    @include desktop {
+      gap: 4px;
+    }
+
+    .tit {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      span, p {
+        padding: 8px;
+        width: 100%;
+        display: block;
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 12px;
+        text-align: center;
+        @include desktop {
+          font-size: 20px;
+          padding: 12px;
+        }
+      }
+
+      span {
+        background-color: #500C08;
+      }
+
+      p {
+        background-color: #930000;
+        white-space: nowrap;
+      }
+    }
+
+    .detail {
+      padding: 0 8px;
+      background-color: #FBFAE7;
+      white-space: nowrap;
+      min-width: 120px;
+
+      p {
+        padding: 20px 4px;
+        text-align: center;
+        color: #500C08;
+        font-size: 12px;
+        @include desktop {
+          font-size: 18px;
+          padding: 44px 12px;
+        }
+      }
+
+      span {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: #500C08;
+      }
+    }
+  }
+
+  .yaam-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    @include desktop {
+      gap: 12px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    li {
+      position: relative;
+      padding-bottom: 200px;
+      @include desktop {
+        opacity: 1;
+        padding-bottom: 0;
+      }
+    }
+
+    .icon {
+      margin-top: 8px;
+      @include desktop {
+        margin-top: 24px;
+      }
+
+      img {
+        width: 28px;
+        @include desktop {
+          width: 52px;
+        }
+      }
+    }
+
+    .icon.block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .icon.hidden {
+      @include desktop {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .group {
+      border-radius: 100%;
+    }
+
+    .num1 {
+      background-color: #E50A84;
+    }
+
+    .num2 {
+      background-color: #540F76;
+    }
+
+    .num3 {
+      background-color: #FCC800;
+    }
+
+    .title {
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      aspect-ratio: 1/1;
+      color: white;
+      @include desktop {
+        font-size: 42px;
+      }
+
+      img {
+        width: 70%;
+        max-width: 180px;
+        margin-top: 12px;
+      }
+    }
+
+    .detail.hidden {
+      @include desktop {
+        display: block;
+      }
+    }
+
+    .detail {
+      background-color: transparent;
+      position: absolute;
+      width: calc(100vw - 40px);
+      @include desktop {
+        width: 100%;
+        margin-left: 0 !important;
+        position: static;
+      }
+
+      h3 {
+        font-size: 12px;
+        font-weight: 800;
+        text-align: center;
+        color: white;
+        padding: 6px;
+        padding-top: 8px;
+        @include desktop {
+          padding: 16px;
+          padding-top: 16px;
+          height: 98px;
+          font-size: 22px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          p {
+            width: 90%;
+            margin: 0 auto;
+          }
+        }
+      }
+
+      .detail-text {
+        padding: 24px;
+        height: 148px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @include desktop {
+          height: 380px;
+          padding: 60px 24px;
+        }
+
+        p {
+          font-size: 12px;
+          text-align: center;
+          @include desktop {
+            font-size: 18px;
+          }
+
+          &:last-child {
+            margin-top: 8px;
+            @include desktop {
+              margin-top: 16px;
+            }
+          }
+        }
+      }
+
+      &.num1 {
+        left: 0;
+
+        .detail-text {
+          background-color: #FCE6F3;
+        }
+
+        h3 {
+          background-color: #E50A84;
+        }
+
+        .detail-text {
+          border: 1px solid #E50A84;
+        }
+      }
+
+      &.num2 {
+        left: -100%;
+        margin-left: -4px;
+
+        .detail-text {
+          background-color: #EEE7F1;
+        }
+
+        h3 {
+          background-color: #540F76;
+        }
+
+        .detail-text {
+          border: 1px solid #540F76;
+        }
+      }
+
+      &.num3 {
+        left: -200%;
+        margin-left: -8px;
+
+        .detail-text {
+          background-color: #FFF9E5;
+        }
+
+        h3 {
+          background-color: #FCC800;
+        }
+
+        .detail-text {
+          border: 1px solid #FCC800;
+        }
+      }
+    }
+  }
+
+  // @include mobile{
+  .mo_h1 {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 130%;
+    letter-spacing: -0.66px;
+  }
+
+  // .mo_body2{
+  //     font-weight: 400;
+  //     font-size: 12px;
+  //     line-height: 160%;
+  //     letter-spacing: -0.36px;
+  // }
+  // .mo_caption{
+  //     font-weight: 400;
+  //     font-size: 10px;
+  //     line-height: 160%;
+  //     letter-spacing: -0.3px;
+  // }
+  // }
+
+  .privacy_policy {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.6em;
+    color: #000000;
+    letter-spacing: -0.33px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include desktop {
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    > section {
+      margin-bottom: 0;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 1.6em;
+      letter-spacing: -0.36px;
+      // margin-bottom: 8px;
+      color: #000000;
+
+      @include desktop {
+        font-size: 16px;
+      }
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.5em;
+      color: #000000;
+
+      @include desktop {
+        font-size: 18px;
+      }
+    }
+
+    ol, ul {
+      margin-left: 8px;
+      list-style-position: inside;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      &.list-decimal {
+        list-style-type: decimal;
+      }
+
+      &.list-disc {
+        list-style-type: disc;
+      }
+    }
+
+    ol {
+      &.mt-2 {
+        margin-top: 8px;
+      }
+    }
+
+    ul {
+      &.ml-4 {
+        margin-left: 16px;
+      }
+
+      &.text-10px {
+        font-size: 10px;
+
+        @include desktop {
+          font-size: 14px;
+        }
+      }
+
+      &.list-disc {
+        list-style-type: disc;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #D9D9D9;
+      font-size: 10px;
+      margin-bottom: 8px;
+      text-align: center;
+
+      @include desktop {
+        font-size: 14px;
+      }
+
+      thead {
+        tr {
+          th, td {
+            border: 1px solid #D9D9D9;
+            padding: 12px 24px;
+            text-align: center;
+            font-weight: 400;
+            @include desktop {
+              padding: 16px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          th, td {
+            border: 1px solid #D9D9D9;
+            padding: 12px 24px;
+            text-align: center;
+            font-weight: 400;
+
+            @include desktop {
+              padding: 8px 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .space-y-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      > div {
+        p {
+          &.mb-1 {
+            margin-bottom: 4px;
+          }
+
+          &.font-semibold {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    p {
+      &.mb-2 {
+        margin-bottom: 8px;
+      }
+
+      &.mt-2 {
+        margin-top: 8px;
+      }
+
+      &.ml-2 {
+        margin-left: 8px;
+      }
+
+      &.font-semibold {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .privacy-checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+
+    .privacy-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 26px;
+      height: 26px;
+
+      border-radius: 100%;
+      background-color: #8D8D8F;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.2s, border-color 0.2s;
+      display: flex;
+
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        width: 6px;
+        height: 12px;
+        border: solid #ffffff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+
+      &:checked {
+        background-color: #500C08;
+        border-color: #500C08;
+      }
+
+      &:hover {
+        border-color: #500C08;
+      }
+    }
+  }
+
+  // 얇고 투명한 스크롤바 스타일
+  .thin-transparent-scrollbar {
+    // Firefox
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+    // Webkit (Chrome, Safari, Edge)
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  // Yaam Store 공통 스타일
+  .yaam-section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto;
+    @include desktop {
+      max-width: 542px;
+      gap: 8px;
+    }
+
+    .yaam-section-label {
+      font-size: 14px;
+      color: #8C6FA1;
+      letter-spacing: -0.42px;
+      line-height: 1.7;
+
+      @include desktop {
+        font-size: 18px;
+      }
+    }
+
+    .yaam-section-title {
+      @extend .mo_h2;
+      font-size: 18px;
+      font-weight: 800;
+      color: #532873;
+      letter-spacing: -0.54px;
+      line-height: 1.3;
+      text-align: center;
+
+      @include desktop {
+        font-size: 32px;
+      }
+    }
+  }
+
+  .yaam-competence-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    @include tablet {
+      flex-direction: row;
+      gap: 56px;
+      &:nth-child(n+4) {
+        flex-direction: row-reverse;
+      }
+    }
+    @include desktop {
+      gap: 80px;
+    }
+
+    .yaam-divider {
+      height: 1px;
+      background-color: #532873;
+    }
+
+    .yaam-item-header {
+      display: flex;
+      flex-direction: column;
+
+      .yaam-item-title-en {
+        font-family: 'GT-Ultra-Standard-Ultra', sans-serif;
+        font-size: 16px;
+        color: #532873;
+        letter-spacing: -0.08px;
+        line-height: 1.4;
+        font-weight: 900;
+        @include tablet {
+          font-size: 23px;
+        }
+
+        @include desktop {
+          font-size: 32px;
+        }
+      }
+
+      .yaam-item-title-ko {
+        font-size: 16px;
+        font-weight: 700;
+        color: #532873;
+        letter-spacing: -0.48px;
+        line-height: 1.3;
+        @include tablet {
+          font-size: 20px;
+        }
+
+        @include desktop {
+          font-size: 26px;
+        }
+      }
+    }
+
+    .yaam-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 12px;
+      color: #231130;
+      letter-spacing: -0.36px;
+      line-height: 1.6;
+      list-style: disc;
+      list-style-position: outside;
+      padding-left: 10px;
+      @include tablet {
+        font-size: 14px;
+      }
+      @include desktop {
+        font-size: 18px;
+      }
+    }
+
+    .yaam-item-image {
+      height: 100px;
+      background-color: white;
+      margin-top: 12px;
+      width: 100%;
+      @include tablet {
+        margin-top: 0px;
+        height: 220px;
+      }
+      @include desktop {
+        height: 300px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .yaam-service-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+    margin: 0 auto 24px;
+    @include tablet {
+      max-width: 442px;
+      margin: 0 auto 32px;
+    }
+    @include desktop {
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto 56px;
+    }
+
+    .yaam-service-logo-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      img {
+        height: 40px;
+
+        @include desktop {
+          height: 80px;
+        }
+      }
+
+      .yaam-service-title {
+        font-family: 'GT-Ultra-Standard-black', sans-serif;
+        font-size: 22px;
+        letter-spacing: -0.66px;
+        line-height: 1.1;
+
+        @include desktop {
+          font-size: 32px;
+        }
+      }
+    }
+
+    .yaam-service-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+
+      .yaam-service-subtitle {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.48px;
+        line-height: 1.3;
+        text-align: center;
+
+        @include desktop {
+          font-size: 32px;
+          margin-bottom: 8px;
+        }
+      }
+
+      .yaam-service-description {
+        font-size: 14px;
+        letter-spacing: -0.42px;
+        line-height: 1.7;
+        text-align: center;
+
+        @include desktop {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+
+  .yaam-store-card {
+    background-color: #231130;
+    padding: 24px;
+    @include tablet {
+      flex: 1;
+    }
+
+    @include desktop {
+      padding: 32px;
+    }
+
+    .yaam-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+
+      @include tablet {
+        gap: 16px;
+      }
+
+      .yaam-card-header {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: center;
+
+        .yaam-card-title-en {
+          font-family: 'GT-Ultra-Standard-Ultra', sans-serif;
+          font-size: 22px;
+          color: #EEEAF1;
+          letter-spacing: -0.66px;
+          line-height: 1.1;
+
+          @include tablet {
+            font-size: 20px;
+          }
+          @include desktop {
+            font-size: 32px;
+          }
+        }
+
+        .yaam-card-title-ko {
+          font-size: 22px;
+          font-weight: 800;
+          color: #EEEAF1;
+          letter-spacing: -0.66px;
+          line-height: 1.3;
+
+          @include tablet {
+            font-size: 20px;
+          }
+          @include desktop {
+            font-size: 32px;
+          }
+        }
+      }
+
+      .yaam-card-divider {
+        width: 100%;
+        height: 1px;
+        background-color: #532873;
+      }
+
+      .yaam-card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+        color: #CABCD4;
+        letter-spacing: -0.36px;
+        line-height: 1.6;
+        text-align: center;
+
+        @include tablet {
+          font-size: 14px;
+        }
+        @include desktop {
+          font-size: 18px;
+
+        }
+      }
+    }
+  }
+
+  .yamm_bottom_back {
+    height: 260px; /* 모든 뷰포트에서 동일 */
+    background-image: url('../../../public/img/brand/store/yamm/yamm_bottom_back.svg');
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: 45% 0%;
+    width: 100%;
+    @include tablet {
+      // height: 360px;
+    }
+
+  }
+
+  .yaam_section {
+    > div {
+      padding-inline: 20px;
+      padding-block: 40px;
+      @include desktop {
+        padding-block: 100px;
+      }
+    }
+  }
+
+  .brand-story-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0 48px;
+    @include desktop {
+      padding: 80px 0;
+    }
+
+    .inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+      padding-inline: 20px;
+      position: relative;
+      z-index: 10;
+      @include desktop {
+      }
+
+    }
+
+    .title {
+      font-family: 'GT-Ultra-Standard-Ultra', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.66px;
+      line-height: 1.1;
+      text-align: center;
+      @include desktop {
+        font-size: 64px;
+      }
+
+      &.pc_title {
+        display: block;
+        @include desktop {
+          display: none;
+        }
+      }
+    }
+
+    .contents {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      @include desktop {
+        gap: 80px;
+        flex-direction: row;
+      }
+    }
+
+    .img_box {
+      width: 100%;
+      height: 100%;
+      flex: none;
+      @include desktop {
+        width: 500px;
+        aspect-ratio: 5/6;
+        object-fit: cover;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .description-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+      @include desktop {
+        gap: 40px;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      .title {
+        display: none;
+        @include desktop {
+          display: block;
+        }
+      }
+
+      .text-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        @include desktop {
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .sub_title {
+          font-size: 18px;
+          font-weight: 800;
+          color: #ECE6E6;
+          letter-spacing: -0.54px;
+          line-height: 1.3;
+          text-align: center;
+          @include desktop {
+            font-size: 36px;
+          }
+        }
+
+        p {
+          font-size: 12px;
+          font-weight: 400;
+          text-align: center;
+          @include desktop {
+            font-size: 18px;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+  .brand_history_section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 36px 0px;
+    @include desktop {
+      padding: 80px 0;
+    }
+
+    .brand_history_title {
+      font-family: 'GT-Ultra-Standard-Ultra', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.66px;
+      line-height: 1.1;
+      text-align: center;
+      margin-bottom: 36px;
+      @include desktop {
+        font-size: 64px;
+        margin-bottom: 68px;
+      }
+    }
+
+  }
+
+  .brand_product_section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 36px 0px;
+    @include desktop {
+      padding: 80px 0;
+    }
+  }
+
+  .brand_media_section {
+    position: relative;
+    width: 100%;
+    padding: 36px 20px;
+    max-width: 1220px;
+    margin: 0 auto;
+    @include desktop {
+      padding: 80px 20px 200px 0px;
+    }
+  }
+
+  .transition-3d {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+    &::-webkit-scrollbar {
+      width: 1px;
+      height: 1px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}

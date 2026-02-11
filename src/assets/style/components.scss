@@ -1,0 +1,115 @@
+@use '@/assets/style/mixins.scss' as *;
+
+#pub-root {
+  .see-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 9999px;
+    transition-duration: 300ms;
+    letter-spacing: 1.2px;
+    padding-left: 28px;
+    padding-right: 28px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 23px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--samplip-deil-cut);
+    color: var(--samplip-deil-cut);
+    font-family: 'GT-Ultra-Standard-black', sans-serif;
+    font-size: 14px;
+
+    &:hover {
+      background-color: var(--samplip-deil-cut);
+      color: var(--white);
+    }
+
+    @include desktop {
+      line-height: 1.2;
+      padding-left: 52px;
+      padding-right: 52px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      font-size: 19px;
+    }
+  }
+
+  // 라이선스 테이블 스타일
+  .license-table {
+    width: 100%;
+    min-width: 700px; // 최소 너비 설정으로 overflow-x-auto가 작동하도록
+    white-space: nowrap;
+    table-layout: fixed;
+    font-size: 10px;
+
+    @include desktop {
+      font-size: 15px;
+      // min-width: 800px;
+    }
+
+    thead {
+      tr {
+        th {
+          border-top: 2px solid #ece6e6;
+          border-bottom: 1px solid #ece6e6;
+          border-right: 1px solid #ece6e6;
+          border-style: solid;
+          background-color: transparent;
+          padding-left: 32px;
+          padding-right: 32px;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          height: 65px;
+          font-weight: bold;
+          color: #ece6e6;
+          text-align: center;
+          letter-spacing: -0.15px;
+          white-space: nowrap;
+
+          &:last-child {
+            border-right: none;
+          }
+
+          &.category {
+            width: 180px;
+          }
+
+          &.available {
+            width: 140px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          border-bottom: 1px solid #ece6e6;
+          border-style: solid;
+          background-color: transparent;
+          padding-left: 32px;
+          padding-right: 32px;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          color: #ece6e6;
+          text-align: center;
+          letter-spacing: -0.15px;
+          white-space: nowrap;
+
+          &.category {
+            border-right: 1px solid #ece6e6;
+            font-weight: bold;
+            vertical-align: top;
+          }
+
+          &:not(.category):not(:last-child) {
+            border-right: 1px solid #ece6e6;
+          }
+        }
+      }
+    }
+  }
+}

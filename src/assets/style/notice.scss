@@ -1,0 +1,21 @@
+#pub-root {
+    .table-area {
+        table {
+            width: 100%;
+            table-layout: fixed;
+            overflow-x: auto;
+            white-space: nowrap;
+
+            th, td {
+                // border: 1px solid #D9D9D9;
+                padding: 8px 10px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            thead th {
+                // background-color: #f7f7f7;
+            }
+        }
+    }
+}

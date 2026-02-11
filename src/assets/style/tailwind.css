@@ -1,0 +1,58 @@
+@config "../../../tailwind.config.js";
+@import "tailwindcss";
+
+#pub-root {
+    /* 카드 호버 효과 */
+
+    .card-hover {
+        @apply transition-all duration-300 ease-out hover:scale-105 hover:-rotate-3 hover:z-50;
+    }
+
+    /* 카드 오버레이 효과 */
+
+    .card-overlay {
+        @apply flex absolute inset-0 justify-center items-center lg:px-16 px-5 opacity-0 transition-all duration-300 transform *:text-[24px] leading-[1.2];
+        background: rgba(80, 12, 8, 0.6);
+    }
+
+    /* 카드 호버 시 오버레이 표시 */
+
+    .card-hover:hover .card-overlay {
+        @apply opacity-100;
+    }
+
+    /* 모바일 탭(활성 상태)에서도 오버레이 표시 */
+
+    .card-hover.is-active .card-overlay {
+        @apply opacity-100;
+    }
+
+    /* 카드 화살표 버튼 */
+
+    .card-arrow {
+        @apply px-3 py-[6px] lg:px-[24px] lg:py-3 bg-samlipRed rounded-full absolute lg:top-1/2 opacity-0 -translate-y-1/2 -right-4  top-0 lg:-right-16 z-[60] transition-opacity duration-300 rotate-[3.5deg];
+    }
+
+    /* 카드 호버 시 화살표 표시 */
+
+    .card-hover:hover .card-arrow {
+        @apply opacity-100;
+    }
+
+    /* 모바일 탭(활성 상태)에서도 화살표 표시 */
+
+    .card-hover.is-active .card-arrow {
+        @apply opacity-100;
+    }
+
+    /* 화살표 호버 시에도 오버레이 유지 */
+
+    .card-arrow:hover ~ .card-overlay,
+    .card-hover:hover .card-overlay {
+        @apply opacity-100;
+    }
+
+    .center-box {
+        @apply flex justify-center items-center;
+    }
+}

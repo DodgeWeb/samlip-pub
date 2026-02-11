@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'GT-Ultra-Standard-Ultra';
+    src: url('@/assets/fonts/GT-Ultra-Standard-Ultra.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'GT-Ultra-Standard-black';
+    src: url('@/assets/fonts/GT-Ultra-Standard-Black.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'GT-Ultra-Standard-Bold';
+    src: url('@/assets/fonts/GT-Ultra-Standard-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT-Ultra-Standard-regular';
+    src: url('@/assets/fonts/GT-Ultra-Standard-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SandollSamlipHobbangBasic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SandollSamlipHobbangOutline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+/* 크림빵체 */
+@font-face {
+    font-family: 'SamlipCreamyWhite';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/TTSamlipCreamyWhiteR.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#pub-root {
+    * {
+        box-sizing: border-box;
+        /* line-height: 1.5; */
+    }
+
+    button {
+        /* transition: all 0.2s ease-in-out ; */
+        cursor: pointer;
+    }
+
+    .gt-ultra {
+        font-family: 'GT-Ultra-Standard-Ultra', sans-serif;
+    }
+
+    .gt-black {
+        font-family: 'GT-Ultra-Standard-black', sans-serif;
+    }
+
+    .gt-bold {
+        font-family: 'GT-Ultra-Standard-Bold', sans-serif;
+    }
+
+    .gt-regular {
+        font-family: 'GT-Ultra-Standard-regular', sans-serif;
+    }
+
+    .samlip-hopbang {
+        font-family: 'SandollSamlipHobbangBasic', sans-serif;
+        font-weight: 400;
+    }
+
+    .samlip-hopbang-outline {
+        font-family: 'SandollSamlipHobbangOutline', sans-serif;
+        font-weight: 400;
+    }
+
+    .samlip-cream {
+        font-family: 'SamlipCreamyWhite', sans-serif;
+        font-weight: 400;
+    }
+
+    /* CKEditor 기본 스타일 */
+
+    .ck-editor__editable {
+        min-height: 500px;
+    }
+
+    .ck-editor__editable_inline {
+        min-height: 500px;
+    }
+
+    .ck-content {
+        min-height: 500px;
+    }
+}
