@@ -461,7 +461,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                             <div className="pl-5 gap-[5px] flex">
                                 <Button intent="secondary" rounded='full'
                                         className='flex gap-1 justify-center items-center transition-all duration-200 hover:bg-samlipRed hover:text-white'
-                                        onClick={() => navigateTo('/recruit')}>
+                                        onClick={() => navigateTo('/pub/recruit')}>
                                     <span className="text-[15px] leading-[15px]">인재채용</span>
                                     <Icon name="arrowOutward" size={10} className='*:fill-white'/>
                                 </Button>
@@ -473,7 +473,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                                 </Button>
                                 <Button intent="secondary" text rounded='full'
                                         className='flex gap-1 justify-center items-center'
-                                        onClick={() => navigateTo('/service')}>
+                                        onClick={() => navigateTo('/pub/service')}>
                                     <span className="text-[15px] leading-[15px]">고객서비스</span>
                                 </Button>
                                 <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
