@@ -24,27 +24,9 @@ export const NoticeItems: NoticeItem[] = [
     },
     {
         id: 3,
-        title: '개인정보 처리방침 개정 안내',
+        title: '신규 기능 업데이트 안내',
         date: '2025.01.01',
         viewCount: 201,
-    },
-    {
-        id: 4,
-        title: '연말 고객센터 운영시간 안내',
-        date: '2025.01.01',
-        viewCount: 76,
-    },
-    {
-        id: 5,
-        title: '시스템 안정화 작업 완료 안내',
-        date: '2025.01.01',
-        viewCount: 54,
-    },
-    {
-        id: 6,
-        title: '모바일 웹 UI 개선 안내',
-        date: '2025.01.01',
-        viewCount: 89,
     },
 ];
 
@@ -88,7 +70,7 @@ const NoticeIndex = () => {
     );
 
     return (
-        <div className="relative w-full bg-white lg:mt-[90px]">
+        <div className="relative w-full bg-white lg:mt-[60px]">
             <div className="relative w-full">
                 {/* 제목 */}
                 <div className="pt-[80px] lg:pt-[120px] pb-[40px] lg:pb-[120px]">
@@ -125,7 +107,7 @@ const NoticeIndex = () => {
                             notices.map((notice) => (
                                 <div
                                     key={notice.id}
-                                    className="flex border-b border-[#e5e7eb] transition-colors cursor-pointer hover:bg-gray-50"
+                                    className="flex border-b border-gray-200 transition-colors cursor-pointer hover:bg-gray-50"
                                     onClick={() => router.push(`/pub/notice/${notice.id}`)}
                                 >
                                     <div className="flex-1 min-w-0 h-[88px] px-4 lg:px-[32px] py-[12px] flex items-center">

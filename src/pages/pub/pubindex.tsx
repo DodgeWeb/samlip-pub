@@ -5,17 +5,14 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Autoplay} from 'swiper/modules';
 import type {Swiper as SwiperType} from 'swiper';
 
-import Masonry from '@/components/pub/Masonry/Masonry';
+import Masonry from '@/components/pub/masonry/Masonry';
 import {getCardData} from '@/components/pub/Card';
 import AndMore from '@/components/pub/atoms/Button/AndMore';
 import SeeMore from '@/components/pub/atoms/Button/SeeMore';
 import MediaChips from '@/components/pub/MediaChips';
 import {MediaCard} from '@/components/pub/MediaCard';
 
-/* =========================
-   DATA
-========================= */
-
+// 더미 데이터
 const masonryItems = [
     {
         id: '1',
@@ -91,10 +88,6 @@ const swiperImages = [
         title: {line1: '원조 국민 호빵의 진화,', line2: '맛의 깊이를 더한 80주년 기념 호빵'},
     },
 ];
-
-/* =========================
-   COMPONENT
-========================= */
 
 const PubIndex = () => {
     const router = useRouter();
@@ -215,7 +208,7 @@ const PubIndex = () => {
                     FOOD<br/>
                     HAPPY LIFE</p>
 
-                {/* Masonry 갤러리 */}
+                {/* masonry 갤러리 */}
                 <div
                     className='max-w-[1014px] px-5 pt-[28px]  mx-auto flex flex-col items-center lg:gap-[83px] gap-[32px]'>
                     <Masonry

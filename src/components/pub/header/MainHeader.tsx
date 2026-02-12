@@ -7,7 +7,7 @@ import Button from '@/components/pub/atoms/Button/Button';
 import {Icon} from '@/components/pub/icons';
 import clsx from 'clsx';
 import {MenuItem} from './types';
-import {SearchInput} from '@/components/pub/SearchInput';
+import {SearchInput} from '@/components/pub/searchInput';
 
 /** 경로 일치: 같거나, itemPath가 접두사이고 그 다음이 끝 또는 '/'일 때만 true (예: /now/pr가 /now/promise와 겹치지 않도록) */
 function isSubPathActive(currentPath: string, itemPath: string): boolean {
@@ -82,8 +82,8 @@ const SubCategory: React.FC<SubCategoryProps> = ({
                 }}
             >
                 <div className="container mx-auto">
-                    <nav className="flex justify-center items-center py-[29.25px]">
-                        <div className="flex gap-[90px] z-50">
+                    <nav className="flex justify-center items-center py-[18px]">
+                        <div className="flex gap-[48px] z-50">
                             {menuItems[activeMenu].subItems?.map((sub, i) => {
                                 const href = typeof sub.path === 'string' ? sub.path : '';
                                 const hasHref = href.length > 0;
@@ -91,7 +91,7 @@ const SubCategory: React.FC<SubCategoryProps> = ({
                                 const isActive = hasHref ? safeStartsWith(pathname, href) : false;
 
                                 const itemClassName = clsx(
-                                    'text-white text-[21px] transition-all duration-200',
+                                    'text-white text-[15px] transition-all duration-200',
                                     isActive
                                         ? 'font-bold opacity-100'
                                         : 'opacity-60 hover:opacity-100 hover:font-bold'
@@ -146,7 +146,7 @@ interface MainHeaderProps {
     navigateTo: (path: string) => void;
     menuTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
     closeSideMenu: () => void;
-    isMainHeaderTouchingSubTab?: boolean;
+    isMainHeaderTouchingTab?: boolean;
     isSideMenuOpen?: boolean;
     pathname?: string;
 }
@@ -172,7 +172,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
     navigateTo,
     menuTimeoutRef,
     closeSideMenu,
-    isMainHeaderTouchingSubTab = false,
+    isMainHeaderTouchingTab = false,
     isSideMenuOpen = false,
     pathname,
 }) => {
@@ -229,17 +229,17 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
         '/pub/brand/bakery/hotteok',
         '/pub/brand/bakery/creambread',
         '/pub/brand/bakery/nunettine',
-        '/pub/brand/bakery/readyb',
+        '/pub/brand/bakery/readyB',
         '/pub/brand/bakery/migak',
         '/pub/brand/bakery/projecth',
         '/pub/brand/bakery/yakgwa',
         '/pub/brand/bakery/boreumdal',
-        '/pub/brand/bakery/creamBread', // 대비: 대문자 경로
+        '/pub/brand/bakery/creamBread',
         '/pub/brand/bakery/creamBread/Typography',
         '/pub/brand/food/piginthegarden',
-        '/pub/brand/food/hi-m',
+        '/pub/brand/food/hiM',
         '/pub/brand/food/grillschwein',
-        '/pub/brand/food/citydeli',
+        '/pub/brand/food/cityDeli',
         '/pub/now/story',
         '/pub/now/promise',
         '/pub/now/press', // 보도자료 등
@@ -257,20 +257,20 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
         '/pub/brand/bakery/hotteok',
         '/pub/brand/bakery/creambread',
         '/pub/brand/bakery/nunettine',
-        '/pub/brand/bakery/readyb',
+        '/pub/brand/bakery/readyB',
         '/pub/brand/bakery/migak',
         '/pub/brand/bakery/projecth',
         '/pub/brand/bakery/yakgwa',
         '/pub/brand/bakery/boreumdal',
-        '/pub/brand/bakery/cream-bread/typography',
-        '/pub/brand/bakery/cream-bread',
+        '/pub/brand/bakery/creamBread/typography',
+        '/pub/brand/bakery/creamBread',
         '/pub/brand/bakery/creamBread/Typography',
         '/pub/brand/food/piginthegarden',
-        '/pub/brand/food/pig-in-the-garden',
-        '/pub/brand/food/hi-m',
-        '/pub/brand/food/grillschwein',
-        '/pub/brand/food/grill-schwein',
-        '/pub/brand/food/citydeli',
+        '/pub/brand/food/pigInTheGarden',
+        '/pub/brand/food/hiM',
+        '/pub/brand/food/grillSchwein',
+        '/pub/brand/food/grillSchwein',
+        '/pub/brand/food/cityDeli',
     ];
     const pathLowerForHeader = currentPath.toLowerCase();
     const isForceWhiteHeaderRoute = forceWhiteHeaderPrefixes.some((prefix) =>
@@ -294,12 +294,12 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
         return () => window.removeEventListener('resize', update);
     }, []);
 
-    // 모바일에서 SubTab에 닿거나 역행 스크롤 시 흰 배경, 검색 영역이 열렸을 때도 흰 배경, 검색 페이지일 때도 흰 배경
+    // 모바일에서 Tab에 닿거나 역행 스크롤 시 흰 배경, 검색 영역이 열렸을 때도 흰 배경, 검색 페이지일 때도 흰 배경
     // 홈 페이지일 때만 스크롤 최상단이 아니면 흰 배경
     const shouldShowWhiteBg =
         isSearchOpen ||
         currentPath === '/search' ||
-        isMainHeaderTouchingSubTab ||
+        isMainHeaderTouchingTab ||
         // 요청 라우트: 최상단에서도 투명 금지 + 역행(위로 스크롤) 시 흰 배경 유지
         (isMobile && isForceWhiteHeaderRoute && (scrollY === 0 || isScrollingUp)) ||
         // 기존: 모바일에서 헤더가 숨겨진 상태에서 역행 시 흰 배경
@@ -331,15 +331,15 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 }}
             >
                 <div
-                    className="flex md:justify-between   items-center pl-5 mx-auto w-full lg:pb-3 lg:px-10 pr-[7px] pb-1">
+                    className="flex md:justify-between items-center pl-5 mx-auto w-full lg:pb-[6px] lg:px-[31px] pr-[7px] pb-1">
                     {/* 로고 */}
                     <div className="w-full cursor-pointer lg:w-auto"
                          onClick={() => navigateTo(isRecruitPage ? '/pub/recruit' : '/pub/pubindex/')}>
-                        <img src='/img/logo.png' alt="logo" className="lg:size-[78px] size-[40px]"/>
+                        <img src='/img/logo.png' alt="logo" className="lg:size-[54px] size-[40px]"/>
                     </div>
 
                     {/* 네비게이션 메뉴 */}
-                    <nav className="hidden flex-1 justify-between items-center pt-3 lg:flex">
+                    <nav className="hidden flex-1 justify-between items-center pt-3 lg:pt-[6px] lg:flex">
                         {isRecruitPage ? (
                             // 인재채용 전용 메뉴
                             <div className="flex flex-1 items-center justify-center gap-[90px] pl-5">
@@ -396,7 +396,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                         ) : (
                             // 일반 메뉴
                             <div
-                                className="flex flex-1 items-center lg:px-10 xl:gap-[90px] justify-between xl:justify-center pl-5">
+                                className="flex flex-1 items-center lg:px-10 xl:gap-[44px] justify-between xl:justify-center pl-5">
                                 {menuItems.map((menu, index) => {
                                     // 현재 경로가 이 메뉴의 서브아이템 중 하나와 일치하는지 확인 (접두사 겹침 방지: /now/pr ↔ /now/promise)
                                     const isActiveRoute = menu.subItems?.some(subItem => isSubPathActive(currentPath, subItem.path))
@@ -440,7 +440,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                                                 }
                                             }}
                                         >
-                                            <span className="text-[21px] text-center flex-none">
+                                            <span className="text-[15px] text-center flex-none">
                                                 {menu.name}
                                             </span>
                                         </div>
@@ -454,27 +454,27 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                             <Button intent="secondary" rounded='full'
                                     className='flex gap-1 justify-center items-center transition-all duration-200 hover:bg-samlipRed hover:text-white'
                                     onClick={() => navigateTo('/')}>
-                                <span className="text-[15px] leading-[15px]">삼립 홈페이지</span>
+                                <span className="text-[12px] leading-[12px]">삼립 홈페이지</span>
                                 <Icon name="arrowOutward" size={10} className=''/>
                             </Button>
                         ) : (
-                            <div className="pl-5 gap-[5px] flex">
+                            <div className="pl-5 flex lg:pl-0">
                                 <Button intent="secondary" rounded='full'
-                                        className='flex gap-1 justify-center items-center transition-all duration-200 hover:bg-samlipRed hover:text-white'
+                                        className='flex gap-1 justify-center items-center transition-all duration-200 hover:bg-samlipRed hover:text-white px-[18px]'
                                         onClick={() => navigateTo('/pub/recruit')}>
-                                    <span className="text-[15px] leading-[15px]">인재채용</span>
+                                    <span className="text-[12px] leading-[12px]">인재채용</span>
                                     <Icon name="arrowOutward" size={10} className='*:fill-white'/>
                                 </Button>
                                 <Button intent="secondary" text rounded='full'
                                         className='flex gap-1 justify-center items-center'
                                         onClick={() => window.open('https://brand.naver.com/samlip', '_blank', 'noopener,noreferrer')}>
-                                    <span className="text-[15px] leading-[15px]">삼립몰</span>
+                                    <span className="text-[12px] leading-[12px]">삼립몰</span>
                                     <Icon name="arrowOutward" size={10} className='*:fill-secondary-600'/>
                                 </Button>
                                 <Button intent="secondary" text rounded='full'
                                         className='flex gap-1 justify-center items-center'
                                         onClick={() => navigateTo('/pub/service')}>
-                                    <span className="text-[15px] leading-[15px]">고객서비스</span>
+                                    <span className="text-[12px] leading-[12px]">고객서비스</span>
                                 </Button>
                                 <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
                                     <Icon name="search" size={32} className="*:fill-secondary-600"/>
@@ -680,7 +680,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                                             {/* 고객서비스 메뉴 */}
                                             <div className="">
                                                 <Link
-                                                    href="/service"
+                                                    href="/pub/service"
                                                     onClick={() => {
                                                         closeSideMenu();
                                                         setMobileActiveMenu(null);
@@ -840,7 +840,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                                 animate={{opacity: 1, y: 0}}
                                 exit={{opacity: 0, y: -10}}
                                 transition={{duration: 0.25, ease: [0.25, 0.1, 0.25, 1]}}
-                                className="fixed left-0 right-0 bg-[#fbfae7] border-t border-[#e8dbbd] w-full z-[1001] top-[44px] lg:top-[90px] overflow-hidden"
+                                className="fixed left-0 right-0 bg-[#fbfae7] border-t border-[#e8dbbd] w-full z-[1001] top-[44px] lg:top-[60px] overflow-hidden"
                             >
                                 <motion.div
                                     initial={{height: 0}}

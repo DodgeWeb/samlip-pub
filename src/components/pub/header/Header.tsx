@@ -102,7 +102,7 @@ const Header = ({
     const headerWrapperRef = useRef<HTMLDivElement | null>(null);
 
     /* ---------- Tab ---------- */
-    const subTabRoutes = [
+    const TabRoutes = [
         '/pub/service',
         '/pub/company/business',
         '/pub/brand/store',
@@ -116,11 +116,11 @@ const Header = ({
         '/pub/company/invest/disclosure'
     ];
 
-    const hasSubTab = subTabRoutes.some(
+    const hasTab = TabRoutes.some(
         (route) => pathname === route || pathname.startsWith(route)
     );
 
-    const isScrollingUp = useScrollDirection(hasSubTab ? 140 : 50);
+    const isScrollingUp = useScrollDirection(hasTab ? 140 : 50);
 
     const isHeaderVisible = scrollY < mainHeaderHeight;
 
@@ -153,29 +153,29 @@ const Header = ({
 
     const isBrandDetailPage = isBakeryBrandDetail || isFoodBrandDetail;
 
-    const bakeryBrandSubTabs: TabItem[] = [
+    const bakeryBrandTabs: TabItem[] = [
         {label: '삼립호빵', path: '/pub/brand/bakery/hoppang'},
         {label: '삼립호떡', path: '/pub/brand/bakery/hotteok'},
-        {label: '삼립약과', path: '/pub/brand/bakery/yakgwa'},
-        {label: '크림빵', path: '/pub/brand/bakery/cream-bread'},
+        {label: '크림빵', path: '/pub/brand/bakery/creamBread'},
         {label: '보름달', path: '/pub/brand/bakery/boreumdal'},
-        {label: '미각제빵소', path: '/pub/brand/bakery/migak'},
-        {label: '로만밀', path: '/pub/brand/bakery/romanmeal'},
+        {label: '삼립약과', path: '/pub/brand/bakery/yakgwa'},
         {label: '누네띠네', path: '/pub/brand/bakery/nunettine'},
-        {label: '프로젝트H', path: '/pub/brand/bakery/project-h'},
-        {label: '레디비', path: '/pub/brand/bakery/readyb'}
+        {label: '레디비', path: '/pub/brand/bakery/readyB'},
+        {label: '로만밀', path: '/pub/brand/bakery/romanmeal'},
+        {label: '미각제빵소', path: '/pub/brand/bakery/migak'},
+        {label: '프로젝트H', path: '/pub/brand/bakery/projectH'}
     ];
 
-    const foodBrandSubTabs: TabItem[] = [
-        {label: '하이면', path: '/pub/brand/food/hi-m'},
-        {label: '그릭슈바인', path: '/pub/brand/food/grill-schwein'},
-        {label: '피그인더가든', path: '/pub/brand/food/pig-in-the-garden'},
-        {label: '시티델리', path: '/pub/brand/food/citydeli'}
+    const foodBrandTabs: TabItem[] = [
+        {label: '하이면', path: '/pub/brand/food/hiM'},
+        {label: '그릭슈바인', path: '/pub/brand/food/grillSchwein'},
+        {label: '피그인더가든', path: '/pub/brand/food/pigInTheGarden'},
+        {label: '시티델리', path: '/pub/brand/food/cityDeli'}
     ];
 
     const brandTabItems = isBakeryBrandDetail
-        ? bakeryBrandSubTabs
-        : foodBrandSubTabs;
+        ? bakeryBrandTabs
+        : foodBrandTabs;
 
     const brandActiveIndex = Math.max(
         0,
@@ -199,6 +199,49 @@ const Header = ({
         window.addEventListener('scroll', handleScroll, {passive: true});
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useEffect(() => {
+        const onBakeryMainHeader = (ev: Event) => {
+            const e = ev as CustomEvent<{ hide?: boolean }>;
+            setIsBakeryMainHeaderHidden(Boolean(e.detail?.hide));
+        };
+        const onBakeryScrollDir = (ev: Event) => {
+            const e = ev as CustomEvent<{ isScrollingUp?: boolean }>;
+            setIsBakeryScrollingUp(Boolean(e.detail?.isScrollingUp));
+        };
+        const onFoodMainHeader = (ev: Event) => {
+            const e = ev as CustomEvent<{ hide?: boolean }>;
+            setIsFoodMainHeaderHidden(Boolean(e.detail?.hide));
+        };
+        const onFoodScrollDir = (ev: Event) => {
+            const e = ev as CustomEvent<{ isScrollingUp?: boolean }>;
+            setIsFoodScrollingUp(Boolean(e.detail?.isScrollingUp));
+        };
+
+        window.addEventListener('bakery:mainHeader', onBakeryMainHeader as EventListener);
+        window.addEventListener('bakery:scrollDirection', onBakeryScrollDir as EventListener);
+        window.addEventListener('food:mainHeader', onFoodMainHeader as EventListener);
+        window.addEventListener('food:scrollDirection', onFoodScrollDir as EventListener);
+
+        return () => {
+            window.removeEventListener('bakery:mainHeader', onBakeryMainHeader as EventListener);
+            window.removeEventListener('bakery:scrollDirection', onBakeryScrollDir as EventListener);
+            window.removeEventListener('food:mainHeader', onFoodMainHeader as EventListener);
+            window.removeEventListener('food:scrollDirection', onFoodScrollDir as EventListener);
+        };
+    }, []);
+
+    // 라우트가 브랜드 메인 페이지가 아닐 때는 상태를 기본값으로 되돌려 다른 페이지에 영향 없도록 처리
+    useEffect(() => {
+        if (!isBakeryIndex) {
+            setIsBakeryMainHeaderHidden(false);
+            setIsBakeryScrollingUp(false);
+        }
+        if (!isFoodIndex) {
+            setIsFoodMainHeaderHidden(false);
+            setIsFoodScrollingUp(false);
+        }
+    }, [isBakeryIndex, isFoodIndex]);
 
     useEffect(() => {
         const updateMainHeaderHeight = () => {
@@ -276,7 +319,7 @@ const Header = ({
                         isScrollingUp={effectiveIsScrollingUp}
                         headerHeight={headerHeight}
                         isSpecialHeaderPage={false}
-                        hasSubTab={hasSubTab}
+                        hasTab={hasTab}
                     />
                 </motion.div>
             )}

@@ -14,7 +14,7 @@ interface SubCategoryWrapperProps {
     isScrollingUp: boolean;
     headerHeight: number;
     isSpecialHeaderPage?: boolean;
-    hasSubTab?: boolean;
+    hasTab?: boolean;
     forceShowOnMobile?: boolean;
 }
 
@@ -26,7 +26,7 @@ const SubCategoryWrapper: React.FC<SubCategoryWrapperProps> = ({
     isScrollingUp,
     headerHeight,
     isSpecialHeaderPage = false,
-    hasSubTab = false,
+    hasTab = false,
     forceShowOnMobile = false,
 }) => {
     const router = useRouter();
@@ -75,33 +75,33 @@ const SubCategoryWrapper: React.FC<SubCategoryWrapperProps> = ({
 
     const menuIndex = findMenuIndexByPath();
 
-    // SubTab의 sticky 상태 감지
-    const [isSubTabSticky, setIsSubTabSticky] = useState(false);
+    // Tab의 sticky 상태 감지
+    const [isTabSticky, setIsTabSticky] = useState(false);
 
     useEffect(() => {
-        if (!hasSubTab) return;
+        if (!hasTab) return;
 
-        const checkSubTabSticky = () => {
-            const subTabs = document.querySelectorAll('[class*="bg-grilledMeats"]');
+        const checkTabSticky = () => {
+            const Tabs = document.querySelectorAll('[class*="bg-grilledMeats"]');
             let foundSticky = false;
 
-            for (const subTab of subTabs) {
-                if (subTab.classList.contains('sticky')) {
+            for (const Tab of Tabs) {
+                if (Tab.classList.contains('sticky')) {
                     foundSticky = true;
                     break;
                 }
             }
 
-            setIsSubTabSticky(foundSticky);
+            setIsTabSticky(foundSticky);
         };
 
-        const timeoutId = setTimeout(checkSubTabSticky, 100);
+        const timeoutId = setTimeout(checkTabSticky, 100);
 
         let ticking = false;
         const handleScroll = () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    checkSubTabSticky();
+                    checkTabSticky();
                     ticking = false;
                 });
                 ticking = true;
@@ -114,22 +114,22 @@ const SubCategoryWrapper: React.FC<SubCategoryWrapperProps> = ({
             clearTimeout(timeoutId);
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [hasSubTab]);
+    }, [hasTab]);
 
     if (menuIndex === null) return null;
 
     const currentMenu = menuItems[menuIndex];
     if (isRecruitPage || !currentMenu?.subItems) return null;
 
-    const shouldShow = hasSubTab
+    const shouldShow = hasTab
         ? !isHeaderVisible
         : isSpecialHeaderPage
             ? (!isHeaderVisible && isScrollingUp)
             : !isHeaderVisible;
 
-    const shouldBeSticky = hasSubTab && isScrollingUp && isSubTabSticky;
+    const shouldBeSticky = hasTab && isScrollingUp && isTabSticky;
 
-    const isDefaultPage = !hasSubTab && !isSpecialHeaderPage;
+    const isDefaultPage = !hasTab && !isSpecialHeaderPage;
     const shouldTranslateYZero =
         shouldBeSticky ||
         (isDefaultPage && isScrollingUp) ||
@@ -158,13 +158,13 @@ const SubCategoryWrapper: React.FC<SubCategoryWrapperProps> = ({
                         isolation: 'isolate',
                     }}
                     initial={{opacity: 0, y: -100}}
-                    animate={{opacity: 1, y: shouldTranslateYZero ? 0 : -90}}
+                    animate={{opacity: 1, y: shouldTranslateYZero ? 0 : -60}}
                     exit={{opacity: 0, y: -100}}
                     transition={{duration: 0.4, ease: [0.4, 0, 0.2, 1]}}
                 >
                     <div className="container mx-auto">
-                        <nav className="flex justify-center items-center py-[29.25px]">
-                            <div className="flex gap-[90px] z-50">
+                        <nav className="flex justify-center items-center py-[18px]">
+                            <div className="flex gap-[48px] z-50">
                                 {currentMenu.subItems.map((subItem, subIndex) => {
                                     const subPath = subItem.path ?? '';
 
@@ -192,7 +192,7 @@ const SubCategoryWrapper: React.FC<SubCategoryWrapperProps> = ({
                                             <Link
                                                 href={subPath || '#'}
                                                 className={clsx(
-                                                    'text-white transition-all duration-200 text-[21px] transform-gpu',
+                                                    'text-white transition-all duration-200 text-[15px] transform-gpu',
                                                     isActive
                                                         ? 'font-bold opacity-100'
                                                         : 'font-normal opacity-60 hover:opacity-100 hover:font-bold'
@@ -221,7 +221,7 @@ interface SubHeaderProps {
     isScrollingUp: boolean;
     headerHeight: number;
     isSpecialHeaderPage?: boolean;
-    hasSubTab?: boolean;
+    hasTab?: boolean;
     forceShowOnMobile?: boolean;
 }
 
@@ -233,7 +233,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({
     isScrollingUp,
     headerHeight,
     isSpecialHeaderPage = false,
-    hasSubTab = false,
+    hasTab = false,
     forceShowOnMobile = false,
 }) => {
     return (
@@ -245,7 +245,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({
             isScrollingUp={isScrollingUp}
             headerHeight={headerHeight}
             isSpecialHeaderPage={isSpecialHeaderPage}
-            hasSubTab={hasSubTab}
+            hasTab={hasTab}
             forceShowOnMobile={forceShowOnMobile}
         />
     );

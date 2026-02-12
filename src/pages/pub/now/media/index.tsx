@@ -3,12 +3,11 @@ import {useRouter} from 'next/router';
 import {Icon} from '@/components/pub/icons';
 import {MediaCard} from '@/components/pub/MediaCard';
 
-
 const Media = () => {
     const router = useRouter();
 
     return (
-        <main className='overflow-hidden relative w-full bg-cream lg:pt-[120px] lg:mt-[90px]'>
+        <main className='overflow-hidden relative w-full bg-cream lg:pt-[120px] lg:mt-[60px]'>
             <div
                 className='absolute top-[-120px] left-0 w-full h-[500px] lg:h-[1400px] lg:scale-[1.2] scale-[2] lg:top-[-15%] xl:top-[-18%]'>
                 <Icon name="back_wave" className="absolute inset-0 w-full h-full *:*:fill-grilledMeats"/>

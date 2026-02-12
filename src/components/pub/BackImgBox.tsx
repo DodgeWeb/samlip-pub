@@ -35,7 +35,7 @@ const BackImgBox: React.FC<BackImgBoxProps> = ({
     const hasAnySub = !!subLabel;
 
     return (
-        <div className={`overflow-hidden relative w-full lg:h-[580px] h-[495px] lg:mt-[90px] ${className}`}>
+        <div className={`overflow-hidden relative w-full lg:h-[580px] h-[495px] lg:mt-[60px] ${className}`}>
             <img
                 src={imageSrc}
                 alt={label || 'background image'}

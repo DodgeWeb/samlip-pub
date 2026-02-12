@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Icon } from '@/components/pub/icons';
 
+// 타입 정의
 interface NoticeItem {
     id: number;
     title: string;
@@ -10,7 +11,8 @@ interface NoticeItem {
     viewCount?: number;
 }
 
-const NoticeItems: NoticeItem[] = [
+// 더미 데이터
+const allNoticeItems: NoticeItem[] = [
     {
         id: 1,
         title: '홈페이지 리뉴얼 안내',
@@ -57,34 +59,28 @@ const NoticeDetail = () => {
     const { id } = router.query;
 
     const numericId = useMemo(() => {
-        if (!id) return null;
+        if (!id) return 1;
         if (Array.isArray(id)) return Number(id[0]);
         return Number(id);
     }, [id]);
 
-    const [loading, setLoading] = useState(true);
+    const notice =
+        allNoticeItems.find(item => item.id === numericId) ||
+        allNoticeItems[0];
 
-    /* 현재 글 */
-    const detail = useMemo<NoticeItem | null>(() => {
-        if (!numericId) return null;
-        return NoticeItems.find(item => item.id === numericId) ?? null;
-    }, [numericId]);
+    // 이전 / 다음 계산
+    const currentIndex = allNoticeItems.findIndex(
+        item => item.id === notice.id
+    );
 
-    /* 관련 글 (현재 글 제외) */
-    const related = useMemo<NoticeItem[]>(() => {
-        if (!numericId) return [];
-        return NoticeItems
-            .filter(item => item.id !== numericId)
-            .slice(0, 2);
-    }, [numericId]);
+    const prevNotice =
+        currentIndex > 0 ? allNoticeItems[currentIndex - 1] : null;
 
-    useEffect(() => {
-        setLoading(true);
-        const t = setTimeout(() => setLoading(false), 0);
-        return () => clearTimeout(t);
-    }, [numericId]);
+    const nextNotice =
+        currentIndex < allNoticeItems.length - 1
+            ? allNoticeItems[currentIndex + 1]
+            : null;
 
-    /* 뒤로가기 */
     const handleBackClick = () => {
         router.push('/pub/notice');
     };
@@ -123,10 +119,10 @@ const NoticeDetail = () => {
             <div className="px-[67px] lg:px-4 pt-[56px] pb-[40px]">
                 <div className="flex flex-col lg:flex-row gap-[12px] items-center justify-between max-w-[1180px] mx-auto">
                     <h1 className="font-bold text-[18px] lg:text-[42px] tracking-[-0.54px]">
-                        {loading ? '불러오는 중...' : detail?.title}
+                        {notice.title}
                     </h1>
                     <p className="mo_caption pc_body1 text-grayTxt">
-                        {detail?.date}
+                        {notice?.date}
                     </p>
                 </div>
             </div>
@@ -136,7 +132,7 @@ const NoticeDetail = () => {
             {/* 본문 */}
             <div className="px-5 pt-[36px] lg:pt-20 min-h-[500px]">
                 <div className="lg:max-w-[1180px] mx-auto text-[14px] lg:text-[22px] leading-[1.7] tracking-[-0.42px]">
-                    {detail?.content ?? (
+                    {notice?.content ?? (
                         <div className="text-center text-gray-600">
                             내용이 없습니다.
                         </div>
@@ -145,29 +141,32 @@ const NoticeDetail = () => {
             </div>
 
             {/* 다른 소식 */}
-            <div className="bg-[#fbfbfb] mt-[36px] lg:mt-[200px] px-[20px] py-[32px] lg:pt-[111px] lg:pb-[145px]">
+            <div className="bg-[#fbfbfb] mt-[36px] lg:mt-[200px] px-[20px] py-[32px] lg:pt-[111px] lg:pb-[200px]">
                 <div className="lg:max-w-[1180px] mx-auto">
                     <p className="mo_subtitle  lg:!text-[32px] leading-[1.5]  text-black text-center w-full mb-[24px] lg:mb-[32px] font-semibold lg:text-left">
                         다른 소식
                     </p>
 
                     <div className="mb-[32px] lg:mb-[60px]">
-                        {related.map((notice, index) => (
+                        {allNoticeItems
+                            .filter(item => item.id !== notice.id)
+                            .slice(0, 2)
+                            .map((item, index) => (
                             <div
-                                key={notice.id}
-                                onClick={() => router.push(`/pub/notice/${notice.id}`)}
+                                key={item.id}
+                                onClick={() => router.push(`/pub/notice/${item.id}`)}
                                 className={`flex items-center cursor-pointer hover:bg-gray-50 transition-colors
                                     ${index === 0 ? 'border-t border-b' : 'border-b'}
                                     border-[#d9d9d9] h-[52px] lg:h-[88px]`}
                             >
                                 <div className="flex-1 min-w-0 px-[12px] lg:px-[32px]">
                                     <p className="truncate text-[14px] lg:text-[22px]">
-                                        {notice.title}
+                                        {item.title}
                                     </p>
                                 </div>
                                 <div className="w-[120px] lg:w-[236px] text-center">
                                     <p className="text-[12px] lg:text-[22px]">
-                                        {notice.date}
+                                        {item.date}
                                     </p>
                                 </div>
                             </div>

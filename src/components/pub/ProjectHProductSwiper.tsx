@@ -3,7 +3,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import type {Swiper as SwiperType} from 'swiper';
 import {Icon} from '@/components/pub/icons';
 import 'swiper/css/bundle';
-import '@/assets/style/Swiper.scss';
+
 import {MotionBox} from './interAtion/MotionBox';
 
 const useResponsiveChunkSize = () => {

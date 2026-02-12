@@ -10,19 +10,19 @@ export const useTabScroll = () => {
         if (!targetEl) return;
 
         // 기본 offsetTop(기존 동작 유지) + 서브탭/헤더 sticky 상태를 고려한 동적 보정
-        // - 서브헤더가 내려와 있거나(SubHeader 노출) SubTab이 sticky로 내려와 있으면
+        // - 서브헤더가 내려와 있거나(SubHeader 노출) Tab이 sticky로 내려와 있으면
         //   상단 고정 영역(헤더+서브탭)의 실제 높이만큼 빼줘야 "공백"이 남지 않는다.
         const fallbackOffsetTop = 55;
         const getDynamicOffsetTop = () => {
             // 명시적으로 offsetTop을 주면 그 값을 그대로 사용
             if (typeof opts?.offsetTop === 'number') return opts.offsetTop;
 
-            const subTabEl = document.querySelector('[data-tab]') as HTMLElement | null;
-            if (!subTabEl) return fallbackOffsetTop;
+            const TabEl = document.querySelector('[data-tab]') as HTMLElement | null;
+            if (!TabEl) return fallbackOffsetTop;
 
-            const rect = subTabEl.getBoundingClientRect();
-            // 화면에 보이는 sticky subTab의 "아래 끝" 위치(px) = 고정 영역 높이
-            // (상단 헤더 높이 + subTab 높이가 포함된 값)
+            const rect = TabEl.getBoundingClientRect();
+            // 화면에 보이는 sticky Tab의 "아래 끝" 위치(px) = 고정 영역 높이
+            // (상단 헤더 높이 + Tab 높이가 포함된 값)
             const bottom = Math.round(rect.bottom);
             // 안전장치: 비정상 값이면 fallback
             if (!Number.isFinite(bottom) || bottom <= 0) return fallbackOffsetTop;

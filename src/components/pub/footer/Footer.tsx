@@ -158,7 +158,7 @@ export function Footer() {
                             공지사항
                         </Link>
                         <Link
-                            href="/service"
+                            href="/pub/service"
                         >
                             고객서비스
                         </Link>

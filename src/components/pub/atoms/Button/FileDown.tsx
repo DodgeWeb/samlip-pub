@@ -1,6 +1,5 @@
 import React from 'react';
 import { Icon } from '@/components/pub/icons';
-import '@/assets/style/common.scss';
 
 interface FileDownProps {
     className?: string;

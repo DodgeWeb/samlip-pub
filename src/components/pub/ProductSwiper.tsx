@@ -4,7 +4,6 @@ import {Navigation, Autoplay} from 'swiper/modules';
 import type {Swiper as SwiperType} from 'swiper';
 import {Icon} from '@/components/pub/icons';
 import 'swiper/css/bundle';
-import '@/assets/style/Swiper.scss';
 
 interface Product {
     id: number;

@@ -2,20 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {Icon} from '@/components/pub/icons';
 import {PrItem, PrItemCard} from './index';
-import ShareButtons from '@/components/pub/ShareButtons';
+import ShareButtons from '@/components/pub/shareButtons';
 
-// 섹션 타입
+// 타입 정의
 type PrSection = {
-    label?: string;
-    content?: string;
-    mobileContent?: string;
-    pcContent?: string;
-    htmlContent?: React.ReactNode; // JSX 콘텐츠
-    images?: {
-        src: string;
-        caption?: string;
-        className?: string;
-    }[];
+    htmlContent?: React.ReactNode;
+};
+
+type PrDetailType = PrItem & {
+    content: string;
+    sections: PrSection[];
+    relatedPrs: PrItem[];
 };
 
 const extractText = (node: React.ReactNode): string => {
@@ -27,98 +24,98 @@ const extractText = (node: React.ReactNode): string => {
     return '';
 };
 
-// 전체 칼럼 메타 (이전글/다음글, 연관콘텐츠 계산용)
-const allPrsMeta: PrItem[] = [
+// 전체 메타 데이터
+const allPrDetails: PrDetailType[] = [
     {
         id: 1,
         imageUrl: '/img/now/pr_01.jpg',
         title: '원조 국민 호빵의 진화…SPC삼립 80주년 기념 호빵 공개',
         date: '2025년 11월 19일',
+        content: 'SPC삼립 80주년 기념 호빵 출시 소식',
         tags: ['상미당', '호빵'],
+        sections: [
+            {
+                htmlContent: (
+                    <div className="flex flex-col gap-8 lg:gap-20">
+                        <section className="section_mass">
+                            <p className="label red">
+                                원조 국민 호빵의 진화…SPC삼립 80주년 기념 호빵 공개
+                            </p>
+                        </section>
+                    </div>
+                ),
+            },
+        ],
+        relatedPrs: [
+            {
+                id: 2,
+                imageUrl: '/img/now/pr_02.jpg',
+                title: 'SPC삼립, 깨먹는 재미 더한 피카츄의 초코바나나 몬스터볼 케이크 출시',
+                date: '2025년 11월 14일',
+                tags: ['기술'],
+            },
+        ],
     },
     {
         id: 2,
         imageUrl: '/img/now/pr_02.jpg',
         title: 'SPC삼립, 깨먹는 재미 더한 피카츄의 초코바나나 몬스터볼 케이크 출시',
         date: '2025년 11월 14일',
+        content: '피카츄 초코바나나 몬스터볼 케이크 출시 소식',
         tags: ['기술'],
+        sections: [
+            {
+                htmlContent: (
+                    <div className="flex flex-col gap-8 lg:gap-20">
+                        <section className="section_mass">
+                            <p className="label red">
+                                SPC삼립, 깨먹는 재미 더한 피카츄의 초코바나나 몬스터볼 케이크 출시
+                            </p>
+                        </section>
+                    </div>
+                ),
+            },
+        ],
+        relatedPrs: [
+            {
+                id: 1,
+                imageUrl: '/img/now/pr_01.jpg',
+                title: '원조 국민 호빵의 진화…SPC삼립 80주년 기념 호빵 공개',
+                date: '2025년 11월 19일',
+                tags: ['상미당', '호빵'],
+            },
+        ],
     },
 ];
 
-// 샘플 데이터
-const samplePrDetail: PrItem & {
-    sections: PrSection[];
-    relatedPrs: PrItem[];
-} = {
-    id: 1,
-    imageUrl: '/img/now/pr_01.jpg',
-    title: '원조 국민 호빵의 진화…SPC삼립 80주년 기념 호빵 공개',
-    date: '2025년 11월 19일',
-    tags: ['상미당', '호빵'],
-    sections: [
-        {
-            htmlContent: (
-                <>
-                    <div className='flex flex-col gap-8 lg:gap-20'>
-                        <section className='section_mass'>
-                            <p className='label red'>원조 국민 호빵의 진화…SPC삼립 80주년 기념 호빵 공개</p>
-                        </section>
-                    </div>
-                </>
-            ),
-        },
-    ],
-    relatedPrs: [
-        allPrsMeta[1],
-    ],
-};
-
 const PrDetail = () => {
     const router = useRouter();
-    const {id} = router.query;
-    const [showSocialIcons, setShowSocialIcons] = React.useState<boolean>(false);
+    const { id } = router.query;
 
-    const [isMobile, setIsMobile] = useState(false);
+    const [showSocialIcons, setShowSocialIcons] = useState(false);
 
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 1024);
-        check();
-        window.addEventListener('resize', check);
-        return () => window.removeEventListener('resize', check);
-    }, []);
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
-    const numericId = React.useMemo(() => {
-        if (!id) return 1;
-        if (Array.isArray(id)) return parseInt(id[0], 10);
-        return parseInt(id, 10);
-    }, [id]);
+    const numericId = Number(Array.isArray(id) ? id[0] : id) || 1;
 
-    // 현재 글 데이터 구성
     const pr =
-        numericId === 2
-            ? {
-                ...samplePrDetail,
-                ...allPrsMeta[1], // id, title, imageUrl, date, tags 덮어쓰기
-                sections: [
-                    {
-                        htmlContent: (
-                            <div className='flex flex-col gap-8 lg:gap-20'>
-                                <section className='section_mass'>
-                                    <p className='label red'>SPC삼립, 깨먹는 재미 더한 피카츄의 초코바나나 몬스터볼 케이크 출시️</p>
-                                </section>
-                            </div>
-                        ),
-                    },
-                ],
-                relatedPrs: [allPrsMeta[0]],
-            }
-            : samplePrDetail;
+        allPrDetails.find(item => item.id === numericId) ||
+        allPrDetails[0];
 
-    const currentIndex = allPrsMeta.findIndex(item => item.id === numericId);
+    // 이전 / 다음 계산
+    const currentIndex = allPrDetails.findIndex(
+        item => item.id === pr.id
+    );
 
-    const prevPr = allPrsMeta[currentIndex - 1] ?? null;
-    const nextPr = allPrsMeta[currentIndex + 1] ?? null;
+    const prevPr =
+        currentIndex > 0 ? allPrDetails[currentIndex - 1] : null;
 
+    const nextPr =
+        currentIndex < allPrDetails.length - 1
+            ? allPrDetails[currentIndex + 1]
+            : null;
+
+    // 공유
     const handleShare = async () => {
         if (window.innerWidth >= 1024) {
             setShowSocialIcons(!showSocialIcons);
@@ -126,45 +123,68 @@ const PrDetail = () => {
         }
 
         if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: 'SPC삼립 뉴스',
-                    text: pr.title,
-                    url: window.location.href,
-                });
-                console.log('✅ 공유 완료!');
-            } catch (err) {
-                console.error('❌ 공유 취소 또는 오류:', err);
-            }
-        } else {
-            alert('이 브라우저에서는 공유 기능이 지원되지 않습니다.');
+            await navigator.share({
+                title: pr.title,
+                text: pr.title,
+                url: window.location.href,
+            });
         }
     };
 
     const handleCopy = async () => {
-        try {
-            await navigator.clipboard.writeText(window.location.href);
-            alert('링크가 클립보드에 복사되었습니다.');
-        } catch (err) {
-            console.error('❌ 복사 오류:', err);
-            alert('링크 복사에 실패했습니다.');
-        }
+        await navigator.clipboard.writeText(window.location.href);
+        alert('링크가 복사되었습니다.');
     };
 
     const handleFacebookShare = () => {
         const url = encodeURIComponent(window.location.href);
-        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
+        window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+            '_blank'
+        );
     };
 
     const handleTwitterShare = () => {
         const url = encodeURIComponent(window.location.href);
         const text = encodeURIComponent(pr.title);
-        const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
+        window.open(
+            `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+            '_blank'
+        );
     };
 
-    const [origin, setOrigin] = useState<string>('');
+    const handleKakaoShare = () => {
+        const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
+
+        if (!kakaoKey) {
+            alert('NEXT_PUBLIC_KAKAO_JS_KEY 환경변수가 필요합니다.');
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://developers.kakao.com/sdk/js/kakao.js';
+        script.async = true;
+
+        script.onload = () => {
+            const Kakao = (window as any).Kakao;
+            if (!Kakao.isInitialized()) Kakao.init(kakaoKey);
+
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: pr.title,
+                    description: pr.content,
+                    imageUrl: window.location.origin + pr.imageUrl,
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href,
+                    },
+                },
+            });
+        };
+
+        document.head.appendChild(script);
+    };
 
     return (
         <main>
@@ -218,13 +238,7 @@ const PrDetail = () => {
                                 onTwitterShare={handleTwitterShare}
                                 kakaoShareData={{
                                     title: pr.title,
-                                    description: pr.sections
-                                        .map((s: PrSection) => {
-                                            if (s.htmlContent) return extractText(s.htmlContent);
-                                            return s.content ?? s.mobileContent ?? s.pcContent ?? '';
-                                        })
-                                        .join(' ')
-                                        .substring(0, 200) + '...',
+                                    description: pr.content,
                                     imageUrl: origin + pr.imageUrl,
                                 }}
                             />

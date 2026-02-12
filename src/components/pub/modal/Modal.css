@@ -1,0 +1,66 @@
+/* 백드롭 */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+}
+
+.modal-backdrop.visible {
+    opacity: 1;
+    background: rgba(0,0,0,0.5);
+}
+
+/* 모달 박스 */
+.modal-container {
+    background: var(--modal-bg-color, #ffffff);
+    border-radius: var(--modal-border-radius, 16px);
+    max-width: 850px;
+    width: calc(100% - 2rem);
+    box-shadow: var(--box-shadow-card, 2px 2px 16px 0 rgba(0,0,0,0.08));
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+.modal-container.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 내용 영역 */
+.modal-content {
+    padding-inline: 1.25rem;
+    padding-top: 80px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--modal-text-color, #111827);
+    white-space: pre-wrap;
+}
+
+.modal-content-template {
+    font-size: 1rem;
+    color: var(--modal-text-color, #111827);
+    white-space: pre-wrap;
+}
+
+/* footer */
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    gap: 0.5rem;
+    position: sticky;
+    bottom: 0;
+    background: var(--modal-bg-color, #ffffff);
+}

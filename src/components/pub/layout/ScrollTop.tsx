@@ -11,22 +11,22 @@ export default function ScrollTop() {
     }, [router.asPath]);
 
     const scrollToTop = useCallback(() => {
-        if (pathname.startsWith('/company/ci-bi')) {
+        if (pathname.startsWith('/pub/company/ci-bi')) {
             window.dispatchEvent(new CustomEvent('cibi:reset', {detail: {behavior: 'smooth'}}));
             return;
         }
 
-        if (pathname === '/company/history') {
+        if (pathname === '/pub/company/history') {
             window.dispatchEvent(new CustomEvent('history:scrollToTop', {detail: {behavior: 'smooth'}}));
             return;
         }
 
-        if (pathname === '/brand/bakery') {
+        if (pathname === '/pub/brand/bakery') {
             window.dispatchEvent(new CustomEvent('bakery:reset', {detail: {behavior: 'smooth'}}));
             return;
         }
 
-        if (pathname === '/brand/food') {
+        if (pathname === '/pub/brand/food') {
             window.dispatchEvent(new CustomEvent('food:reset', {detail: {behavior: 'smooth'}}));
             return;
         }

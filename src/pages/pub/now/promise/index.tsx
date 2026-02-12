@@ -66,7 +66,7 @@ export const PromiseItemCard: React.FC<{ item: PromiseItem }> = ({item}) => {
     );
 };
 
-// 약속 아이템 데이터
+// 더미 데이터
 const promiseItems: PromiseItem[] = [
     {
         id: 1,
