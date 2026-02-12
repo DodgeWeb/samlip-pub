@@ -164,7 +164,7 @@ const Migak = () => {
                 <BrandHistory data={brandHistoryData} theme="migak"/>
             </section>
 
-            {/* 뒤 이미지 때문에 묵음 */}
+            {/* 뒤 이미지 때문에 묶음 */}
             <section className='overflow-hidden relative bg-[#FEFCF9]'>
                 {/* 브랜드 제품 */}
                 <section className="relative w-full lg:px-0 lg:py-[80px] py-[36px] lg:pb-[60px] overflow-hidden">

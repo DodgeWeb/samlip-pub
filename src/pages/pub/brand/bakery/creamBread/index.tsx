@@ -198,7 +198,7 @@ const Hotteok = () => {
             </section>
 
 
-            {/* 뒤 이미지 때문에 묵음 */}
+            {/* 뒤 이미지 때문에 묶음 */}
             <section className='overflow-hidden relative bg-[#FFF5F6]'>
                 {/* 브랜드 제품 */}
                 <section className="relative w-full py-[36px] lg:pb-[60px] overflow-hidden max-w-[1220px] mx-auto px-5">

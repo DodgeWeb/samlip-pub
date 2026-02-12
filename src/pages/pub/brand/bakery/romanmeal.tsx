@@ -139,7 +139,7 @@ const Romanmeal = () => {
             </section>
 
 
-            {/* 뒤 이미지 때문에 묵음 */}
+            {/* 뒤 이미지 때문에 묶음 */}
             <section className='overflow-hidden relative bg-[#4F2C1D]'>
                 {/* 브랜드 제품 */}
                 <section className="relative w-full lg:px-0 py-[36px] lg:pb-[60px] overflow-hidden">

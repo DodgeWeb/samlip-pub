@@ -223,7 +223,7 @@ const Yakgwa = () => {
             </section>
 
 
-            {/* 뒤 이미지 때문에 묵음 */}
+            {/* 뒤 이미지 때문에 묶음 */}
             <section className='overflow-hidden relative bg-[#FFFEFA]'>
                 <img src="/img/brand/yakgwa/yakgwa_back_01.svg" alt=""
                      className='absolute left-1/2 -translate-x-1/2 w-[800px] max-w-none lg:w-full bottom-[0px]'/>

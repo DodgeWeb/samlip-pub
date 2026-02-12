@@ -188,7 +188,7 @@ const Nunettine = () => {
                             </div>
                         </div>
                     </div>
-                    {/* 뒤 이미지 때문에 묵음 */}
+                    {/* 뒤 이미지 때문에 묶음 */}
                     <section className=' relative bg-[#FFF8E3]'>
                         {/* 브랜드 제품 */}
                         <section className="relative w-full lg:px-0 py-[36px] lg:py-[80px]">
